@@ -1,0 +1,63 @@
+.blink {
+  -webkit-animation: blink 800ms step-end infinite;
+          animation: blink 800ms step-end infinite;
+}
+@-webkit-keyframes blink { 50% { visibility: hidden; }}
+        @keyframes blink { 50% { visibility: hidden; }}
+
+
+.rotate {
+  -webkit-animation: rotate 16s linear infinite;
+  -moz-animation: rotate 16s linear infinite;
+  -ms-animation: rotate 16s linear infinite;
+  -o-animation: rotate 16s linear infinite;
+}
+
+@-webkit-keyframes rotate /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-rev {
+  -webkit-animation: rotateRev 40s linear infinite;
+  -moz-animation: rotateRev 40s linear infinite;
+  -ms-animation: rotateRev 40s linear infinite;
+  -o-animation: rotateRev 40s linear infinite;
+}
+
+@-webkit-keyframes rotateRev /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+@keyframes rotateRev {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}

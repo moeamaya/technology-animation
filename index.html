@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Our Technology | Aptible</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Booooooootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/fullPage.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+    <![endif]-->
+  </head>
+
+  <body class="tech-anim">
+    <header class="primary-header">
+      <nav class="container navbar navbar-primary" role="navigation">
+        <div class="col-md-2">
+          <img src="img/aptible-logo.png" class="logo">
+        </div>
+        <div class="col-md-10">
+          <ul class="nav nav-primary navbar-nav navbar-right">
+            <li>PRICING</li>
+            <li>TECHNOLOGY</li>
+            <li>COMPLIANCE</li>
+            <li>COMPANY</li>
+            <li>SUPPORT</li>
+            <li>SIGN UP</li>
+            <li>LOG IN</li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+
+    <!-- Fixed Diagram Frame -->
+    <section class="fixed-panel">
+      <section class="illustration" id="cloud">
+        <div class="aws">
+          <span class="title">AWS CLOUD</span>
+          <div class="aptible-cloud">
+            <span class="title">APTIBLE DEDICATED CLOUD</span>
+            <div class="customer-vpc-dots">
+              <div class="customer-vpc">
+                <div class="public">
+                  <span>PUBLIC GATEWAY</span>
+                  <div class="left">
+                    <div class="http">HTTP/HTTPS</div>
+                    <div class="load-balancer docker">Load Balancing Layer</div>
+                    <div class="app docker">Application Layer</div>
+                  </div>
+                  <div class="right">
+                    <div class="ssh">SSH</div>
+                    <div class="bastion docker">Bastion Layer</div>
+                  </div>
+                </div>
+                <div class="private">
+                  <span>PRIVATE GATEWAY</span>
+                  <div class="database docker">Secure Database</div>
+                </div>
+              </div>
+
+              <span class="loading-text">
+                CREATING<br>CUSTOMER VPC
+              </span>
+
+              <div class="loading-circle-1"></div>
+              <div class="loading-circle-2">
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Fixed Diagram Frame -->
+    <section class="fixed-console">
+      <div class="console">
+        <div class="base">
+          <div class="header">
+
+          </div>
+          <div class="body">
+            $ <span class="b1-text"></span><span class="blink">|</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slides -->
+    <div class="slides" role="main">
+
+
+      <!-- Intro -->
+      <section class="benefit-panel section" id="intro" data-play="intro">
+        <div class="copy">
+          <div class="container">
+            <div class="col-md-12 text-center">
+              <h1 class="intro-header">Technology</h1>
+              <h3 class="intro-text">Deploy into HIPAA-compliant environments in one line</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Infrastructure -->
+      <section class="benefit-panel section" id="infrastructure">
+        <section class="copy">
+          <div class="container">
+            <div class="col-md-12 text-center">
+
+              <h2>Aptible Infrastructure</h2>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+              <p>You get your own isolated private environment to deploy highly available, scalable applications and database. The Aptible Dedicated Cloud sits on Amazon AWS servers</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+
+      <!-- Gateway -->
+      <section class="benefit-panel section" id="gateway">
+        <section class="copy">
+          <div class="container">
+            <div class="col-md-12 text-center">
+
+              <h2>Public/Private Gateway</h2>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+              <p>We've architected everything carefully to give the minimum amount of "surface area" to every component of the infrastructure</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Network -->
+      <section class="benefit-panel section" id="network">
+        <section class="copy">
+          <div class="container">
+            <div class="col-md-12 text-center">
+
+              <h2>HTTP/HTTPS Access: Load Balancing Layer</h2>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+              <p>The load balancing layers scales traffic across available app containers, enabling greater fault tolerance. HTTPS traffic is secured using industry best practices for SSL/TLS.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Code -->
+      <section class="benefit-panel section" id="code">
+        <section class="copy">
+          <div class="container">
+            <div class="col-md-12 text-center">
+
+              <h2>Application Code</h2>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+              <p>Application code runs in Docker containers in the app layer. Applications are highly portable across dev, testing, staging and production environments.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Bastion -->
+      <section class="benefit-panel section" id="bastion">
+        <section class="copy">
+          <div class="container">
+            <div class="col-md-12 text-center">
+
+              <h2>SSH Access: Bastion Layer</h2>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+              <p>Bastion run in a private subnet, hidden from the outside Internet. Access is restriced to the app & bastion layers. Traffic to-from the database layer is encrypted within the network.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Database -->
+      <section class="benefit-panel section" id="database">
+        <section class="copy">
+          <div class="container">
+            <div class="col-md-12 text-center">
+
+              <h2>Secure Database Layer</h2>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+              <p>Databases run in a private subnet, hidden from the outside Internet. Access is restriced to the app & bastion layers. Traffic to-from the database layer is encrypted within the network.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Scale -->
+      <section class="benefit-panel section" id="scale">
+        <section class="copy">
+          <div class="container">
+            <div class="col-md-12 text-center">
+
+              <h2>Scale Apps and Databases</h2>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+              <p>The load balancing layers scales traffic across available app containers, enabling greater fault tolerance. HTTPS traffic is secured using industry best practices for SSL/TLS.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+
+
+    </div>
+
+    <!-- Vendor -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery.fullPage.js"></script>
+    <script type="text/javascript" src="vendor/animate.min.js"></script>
+    <!-- Javascript -->
+    <script type="text/javascript" src="js/Helpers.js"></script>
+    <script type="text/javascript" src="js/Network.js"></script>
+    <script type="text/javascript" src="js/NetworkLine.js"></script>
+    <!-- Animations -->
+    <script type="text/javascript" src="js/animIntro.js"></script>
+    <script type="text/javascript" src="js/animInfrastructure.js"></script>
+    <script type="text/javascript" src="js/animGateway.js"></script>
+    <script type="text/javascript" src="js/animPush.js"></script>
+    <script type="text/javascript" src="js/animNetwork.js"></script>
+    <!-- Compiled coffeescript -->
+    <script type="text/javascript" src="lib/coffee.js"></script>
+
+    <script>
+      // Dirty global
+      var network;
+    </script>
+
+
+
+  </body>
+</html>

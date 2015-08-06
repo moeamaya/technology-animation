@@ -393,7 +393,7 @@ section.illustration .customer-vpc .public span {
   font-weight: normal;
   font-size: 18px;
 
-  transition: color 900ms ease-in-out, background 900ms ease-in-out;
+  transition: color 900ms ease-in-out, background 600ms ease-in-out;
 
   opacity: 0;
 }
@@ -446,7 +446,7 @@ section.illustration .customer-vpc .private span {
   font-weight: normal;
   font-size: 18px;
 
-  transition: color 900ms ease-in-out, background 900ms ease-in-out;
+  transition: color 900ms ease-in-out, background 600ms ease-in-out;
 
   opacity: 0;
 }

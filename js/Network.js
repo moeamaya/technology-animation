@@ -4,6 +4,8 @@ var Network = function(){
   var OFFSET = 38; // in pixels, inner-offset from vpc box
   var SPACING = 24; // 20px spacing between network lines
 
+  var $networkContainer;
+
   var httpLines = [];
   var sshLines = [];
   var allLines = [];
@@ -14,24 +16,26 @@ var Network = function(){
   var vpcLeft = Math.floor(vpcPosition.left) + (OFFSET/2);
   var vpcWidth = $vpc.outerWidth() - OFFSET;
 
-  var numLines = Math.floor(vpcWidth / SPACING);
+  var numLines = Math.ceil(vpcWidth / SPACING);
   var halfLines = Math.ceil(numLines * 0.7);
-
-
-  var $networkContainer = $("<div class='network-container'>")
-    .css({
-      height: vpcTop + "px",
-      width: vpcWidth,
-      left: vpcLeft + "px"
-    });
-
-  $("body").append($networkContainer);
 
 
 
   // -------------------------------
   // Public methods
   // -------------------------------
+
+
+  self.generateNetwork = function(){
+    $networkContainer = $("<div class='network-container'>")
+      .css({
+        height: vpcTop + "px",
+        width: vpcWidth,
+        left: vpcLeft + "px"
+      });
+
+    $("body").append($networkContainer);
+  };
 
 
   self.generateLines = function(){

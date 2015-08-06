@@ -76,14 +76,12 @@ var NetworkLine = function(yPos, klass){
   var showActive = function(){
     animate({
       el: $dot,
-
       easing: "easeOutCirc",
       opacity: [0, 1],
       duration: 600,
     });
     animate({
       el: $active,
-
       easing: "easeOutCirc",
       opacity: [0, 1],
       duration: 600,
@@ -94,14 +92,12 @@ var NetworkLine = function(yPos, klass){
   var hideActive = function(){
     animate({
       el: $dot,
-
       easing: "easeOutCirc",
       opacity: [1, 0],
       duration: 600,
     });
     animate({
       el: $active,
-
       easing: "easeOutCirc",
       opacity: [1, 0],
       duration: 600,

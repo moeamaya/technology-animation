@@ -7,6 +7,13 @@
 #
 class techAnimation
 
+  # Network Animation Object
+  # This var gets set during the Gateway animation
+  # since it depends on the position and size of
+  # <div class="customer-vpc">
+  network = null
+
+
   # Slide States
   #
   intro = {
@@ -20,47 +27,68 @@ class techAnimation
     play: false
   }
 
-
   #
   # Play Animations
   # These animations fire when a user scrolls down
   # and views a slide for the first time
   #
   playIntro = ->
-    unless intro.play
-      animate
-        el: '.console'
-        easing: 'easeOutCirc'
-        opacity: [0, 1]
-        translateY: [1000, 0]
-        duration: 1500
-        delay: 100
-        begin: ->
-          intro.play = true
-        complete: ->
-          intro.end = true
+    animate
+      el: '.console'
+      easing: 'easeOutCirc'
+      opacity: [0, 1]
+      translateY: [1000, 0]
+      duration: 1500
+      delay: 100
+    animate
+      el: '.intro-header'
+      easing: 'easeOutCirc'
+      opacity: [0, 1]
+      duration: 1500
+      delay: 1600
+    animate
+      el: '.intro-text'
+      easing: 'easeOutQuad'
+      opacity: [0, 1]
+      duration: 1500
+      delay: 1900
+    animate
+      el: '.primary-header'
+      easing: 'easeOutQuad'
+      opacity: [0, 1]
+      duration: 1000
+      delay: 2300
+    setTimeout (->
+      $src = $ '.b1-text'
+      Helpers.typeConsole 'aptible apps:create test-app', $src
+    ), 2000
 
   playGateway = ->
     $('.http, .ssh').addClass('faded')
-    setTimeout (-> $('.docker').addClass('faded') ), 300
+    setTimeout (-> $('.docker').addClass('faded') ), 100
+    network = new Network()
+    network.generateNetwork()
+    network.generateLines()
+
+  playNetwork = ->
+    $('.http, .load-balancer').removeClass('faded')
 
   playApp = ->
     $('.app').removeClass('faded')
 
   playBastion = ->
-    $('.ssh').removeClass('faded')
-    $('.bastion').removeClass('faded')
+    $('.ssh, .bastion').removeClass('faded')
 
   playDatabase = ->
     $('.database').removeClass('faded')
 
   playScaling = ->
     $('.load-balancer, .app, .bastion').removeClass('faded')
-    window.network.runHalf()
-    setTimeout (-> window.network.runHalf2() ), 3000
+    setTimeout (-> network.runHalf2() ), 3000
 
   stopIntro: ->
     animate.stop '.console'
+
 
   #
   # Leave Animations
@@ -83,28 +111,30 @@ class techAnimation
 
   leaveGateway = ->
     $('#gateway .copy').fadeOut(150)
+    network.runHttp()
 
   leaveNetwork = ->
     $('#network .copy').fadeOut(150)
-    $('.public .http').addClass('faded')
-    $('.load-balancer').addClass('faded')
-    window.network.stop()
+    $('.http, .load-balancer').addClass('faded')
+    network.stop()
 
   leaveApp = ->
     $('#code .copy').fadeOut(150)
     $('.app').addClass('faded')
-    window.network.runSSH()
+    network.runSSH()
 
   leaveBastion = ->
     $('#bastion .copy').fadeOut(150)
     $('.bastion').addClass('faded')
     $('.ssh').addClass('faded')
-    window.network.stop()
+    network.stop()
 
   leaveDatabase = ->
     $('#database .copy').fadeOut(150)
+    network.runHalf()
 
   leaveScaling = ->
+
 
   #
   # Back Animations
@@ -112,17 +142,21 @@ class techAnimation
   # and views the next slide above
   #
 
+
   #
   # Click Animations
+  # These animations fire when a user clicks
+  # the navigations dots to jump to a slide
   #
+
 
   #
   # Animation arrays
   # fullPage.js uses index values to determine
-  # it's current slide position which corresponds
+  # its current slide position which corresponds
   # to these immutable arrays
   #
-  play: [animIntro, animInfrastructure, playGateway, animNetwork, playApp, playBastion, playDatabase, playScaling]
+  play: [playIntro, animInfrastructure, playGateway, playNetwork, playApp, playBastion, playDatabase, playScaling]
   leave: [leaveIntro, leaveInfrastructure, leaveGateway, leaveNetwork, leaveApp, leaveBastion, leaveDatabase, leaveScaling]
 
 

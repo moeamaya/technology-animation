@@ -1,11 +1,14 @@
 #
 # techAnimation
 #
-# Local Object for state management and formatting helpers for that state.
-# Requires jQuery, broadcasts update events on $(document)
-# DOM controls (links, inputs) update this object
+# Local Object for state management and animation sequences
+# Requires jQuery
+#
 #
 class techAnimation
+
+  # Slide States
+  #
   intro = {
     visible: false
     state: false
@@ -13,7 +16,16 @@ class techAnimation
     leave: false
     end: false
   }
+  infrastructure = {
+    play: false
+  }
 
+
+  #
+  # Play Animations
+  # These animations fire when a user scrolls down
+  # and views a slide for the first time
+  #
   playIntro = ->
     unless intro.play
       animate
@@ -21,12 +33,16 @@ class techAnimation
         easing: 'easeOutCirc'
         opacity: [0, 1]
         translateY: [1000, 0]
-        duration: 500
+        duration: 1500
         delay: 100
         begin: ->
           intro.play = true
         complete: ->
           intro.end = true
+
+  playGateway = ->
+    $('.http, .ssh').addClass('faded')
+    setTimeout (-> $('.docker').addClass('faded') ), 300
 
   playApp = ->
     $('.app').removeClass('faded')
@@ -46,8 +62,11 @@ class techAnimation
   stopIntro: ->
     animate.stop '.console'
 
-
-
+  #
+  # Leave Animations
+  # These animations fire when a user scrolls down
+  # and views the next slide below
+  #
   leaveIntro = ->
     unless intro.leave
       animate
@@ -87,9 +106,23 @@ class techAnimation
 
   leaveScaling = ->
 
+  #
+  # Back Animations
+  # These animations fire when a user scrolls up
+  # and views the next slide above
+  #
 
+  #
+  # Click Animations
+  #
 
-  play: [animIntro, animInfrastructure, animGateway, animNetwork, playApp, playBastion, playDatabase, playScaling]
+  #
+  # Animation arrays
+  # fullPage.js uses index values to determine
+  # it's current slide position which corresponds
+  # to these immutable arrays
+  #
+  play: [animIntro, animInfrastructure, playGateway, animNetwork, playApp, playBastion, playDatabase, playScaling]
   leave: [leaveIntro, leaveInfrastructure, leaveGateway, leaveNetwork, leaveApp, leaveBastion, leaveDatabase, leaveScaling]
 
 

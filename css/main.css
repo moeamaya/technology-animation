@@ -310,7 +310,6 @@ section.illustration .aws .aptible-cloud span.title {
 .customer-vpc .public {
   height: 60%;
   width: 100%;
-  opacity: 0;
 }
 section.illustration .customer-vpc .public span {
   display: inline-block;

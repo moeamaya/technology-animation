@@ -25,7 +25,7 @@ $ ->
 
       onLeave: (index, nextIndex, direction) ->
         # Check the direction and the slide's current state
-        if direction == "down"
+        if direction == 'down'
           techAnim.leave[index - 1].call(this)
         else
           # index - 2 because the first slide can't be scrolled up

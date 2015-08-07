@@ -13,9 +13,20 @@ class techAnimation
   # <div class="customer-vpc">
   network = null
 
-
+  #
   # Slide States
   #
+  animState = {
+    console: false
+    http: false
+    loadBalancer: false
+    app: false
+    ssh: false
+    bastion: false
+    database: false
+  }
+
+  # Animation play states
   intro = {
     play: false
     end: false
@@ -235,8 +246,8 @@ class techAnimation
 
 
   #
-  # Back Animations
-  # These animations fire when a user scrolls up
+  # LeaveUp Animations
+  # These animations fire when before a user scrolls up
   # and views the next slide above
   #
 
@@ -248,16 +259,24 @@ class techAnimation
       duration: 300
 
   leaveUpGateway = ->
+    $('.http, .ssh, .load-balancer, .app, .bastion, .database').removeClass('faded')
 
 
+  leaveUpNetwork = ->
 
+  leaveUpApp = ->
+
+  leaveUpBastion = ->
+
+  leaveUpDatabase = ->
+
+  leaveUpScaling = ->
 
   #
   # Back Animations
   # These animations fire when a user scrolls up
   # and views the next slide above
   #
-  backIntro = ->
 
 
 
@@ -277,7 +296,7 @@ class techAnimation
   #
   play: [playIntro, playInfrastructure, playGateway, playNetwork, playApp, playBastion, playDatabase, playScaling]
   leave: [leaveIntro, leaveInfrastructure, leaveGateway, leaveNetwork, leaveApp, leaveBastion, leaveDatabase, leaveScaling]
-  leaveUp: [leaveUpInfrastructure, leaveUpGateway]
+  leaveUp: [leaveUpInfrastructure, leaveUpGateway, leaveUpNetwork, leaveUpApp, leaveUpBastion, leaveUpDatabase, leaveUpScaling]
 
 
 

@@ -76,7 +76,9 @@ class techAnimation
       ), 2000
 
   playInfrastructure = ->
-    unless infrastructure.play
+    if infrastructure.play
+
+    else
       # disable scrolling until animation finishes
       # borrowed from apple.com/mac-pro
       $.fn.fullpage.setAllowScrolling(false)
@@ -87,11 +89,7 @@ class techAnimation
         translateY: [80, 0]
         duration: 300
         delay: 600
-      animate
-        el: '#infrastructure .copy'
-        easing: 'easeOutQuad'
-        opacity: [0, 1]
-        duration: 800
+      setTimeout ( -> $('#infrastructure .copy').removeClass('disappear') ), 400
       # STEP1: Bounce in and rotate circles
       animate
         el: '.customer-vpc-dots'
@@ -173,9 +171,12 @@ class techAnimation
   playGateway = ->
     $('.http, .ssh').addClass('faded')
     setTimeout (-> $('.docker').addClass('faded') ), 100
-    network = new Network()
-    network.generateNetwork()
-    network.generateLines()
+    if !network
+      network = new Network()
+      network.generateNetwork()
+      network.generateLines()
+    else
+      $('.network-container').removeClass('disappear')
 
   playNetwork = ->
     $('.http, .load-balancer').removeClass('faded')
@@ -214,32 +215,38 @@ class techAnimation
       translateY: [0, 50]
       opacity: [1, 0]
       duration: 400
+    if infrastructure.play
+      animate
+        el: ".fixed-panel"
+        easing: "easeOutQuad"
+        opacity: [0, 1]
+        duration: 800
 
   leaveInfrastructure = ->
-    $('#infrastructure .copy').fadeOut(100)
+    $('#infrastructure .copy').addClass('disappear')
 
   leaveGateway = ->
-    $('#gateway .copy').fadeOut(100)
+    $('#gateway .copy').addClass('disappear')
     network.runHttp()
 
   leaveNetwork = ->
-    $('#network .copy').fadeOut(100)
+    $('#network .copy').addClass('disappear')
     $('.http, .load-balancer').addClass('faded')
     network.stop()
 
   leaveApp = ->
-    $('#code .copy').fadeOut(100)
+    $('#code .copy').addClass('disappear')
     $('.app').addClass('faded')
     network.runSSH()
 
   leaveBastion = ->
-    $('#bastion .copy').fadeOut(100)
+    $('#bastion .copy').addClass('disappear')
     $('.bastion').addClass('faded')
     $('.ssh').addClass('faded')
     network.stop()
 
   leaveDatabase = ->
-    $('#database .copy').fadeOut(100)
+    $('#database .copy').addClass('disappear')
     network.runHalf()
 
   leaveScaling = ->
@@ -259,18 +266,36 @@ class techAnimation
       duration: 300
 
   leaveUpGateway = ->
+    setTimeout (-> $('#infrastructure .copy').removeClass('disappear') ), 500
     $('.http, .ssh, .load-balancer, .app, .bastion, .database').removeClass('faded')
+    $('.network-container').addClass('disappear')
 
 
   leaveUpNetwork = ->
+    setTimeout (-> $('#gateway .copy').removeClass('disappear') ), 500
+    $('.http, .load-balancer').addClass('faded')
+    network.stop()
 
   leaveUpApp = ->
+    setTimeout (-> $('#network .copy').removeClass('disappear') ), 500
+    $('.app').addClass('faded')
+    network.runHttp()
 
   leaveUpBastion = ->
+    setTimeout (-> $('#code .copy').removeClass('disappear') ), 500
+    $('.bastion').addClass('faded')
+    $('.ssh').addClass('faded')
+    network.stop()
 
   leaveUpDatabase = ->
+    setTimeout (-> $('#bastion .copy').removeClass('disappear') ), 500
+    $('.database').addClass('faded')
+    network.runSSH()
 
   leaveUpScaling = ->
+    setTimeout (-> $('#database .copy').removeClass('disappear') ), 500
+    $('.http, .ssh, .load-balancer, .app, .bastion').addClass('faded')
+    network.stop()
 
   #
   # Back Animations

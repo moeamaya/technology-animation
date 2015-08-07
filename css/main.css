@@ -78,6 +78,9 @@ h4 {
   margin: -5px 0 0 -5px !important;
 }
 
+
+
+
 section.fixed-panel {
   z-index: 1001;
   position: fixed;
@@ -127,7 +130,6 @@ section.fixed-console {
 }
 
 
-
 #intro .copy {
   height: 60%;
 }
@@ -144,10 +146,6 @@ section.fixed-console {
   opacity: 0;
 }
 
-#infrastructure .copy {
-  opacity: 0;
-}
-
 
 
 section.illustration {
@@ -158,7 +156,12 @@ section.copy {
   position: absolute;
   width: 100%;
   bottom: 5%;
+  transition: opacity 100ms ease-in;
 }
+section.copy.disappear {
+  opacity: 0;
+}
+
 section.copy h2 {
   font-size: 2.4em;
   color: rgba(255, 255, 255, 1.0);
@@ -450,18 +453,18 @@ section.illustration .customer-vpc .private span {
   opacity: 0;
 }
 .customer-vpc .private .database.faded {
-  /*background: rgba(54, 113, 181, 0.05);*/
   background: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0);
 }
 
 
-.console .blue {
- color: #aadeed;
-}
 .network-container {
   position: fixed;
   top: 0;
+  transition: color 400ms ease-in-out
+}
+.network-container.disappear {
+  opacity: 0;
 }
 
 .network-line {

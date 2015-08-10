@@ -1,38 +1,33 @@
 #
 # techAnimation
 #
-# Local Object for state management and animation sequences
-# Requires jQuery
+# Animation sequences
+# Four different animations depending on user behavior
 #
+# play: runs when a slide is in view and ready
+# leave: runs before a slide transitions on scroll down
+# leaveUp: runs before a slide transtions on scroll up
+# click: runs when a user clicks the navigation dots
 #
+
 class techAnimation
 
   # Network Animation Object
-  # This var gets set during the Gateway animation
-  # since it depends on the position and size of
-  # <div class="customer-vpc">
+  # This var gets set during the Gateway animation or if a
+  # user clicks navigation dots since it depends on the position
+  #  and size of <div class="customer-vpc">
   network = null
 
-  #
-  # Slide States
-  #
-  animState = {
-    console: false
-    http: false
-    loadBalancer: false
-    app: false
-    ssh: false
-    bastion: false
-    database: false
-  }
 
   # Animation play states
   intro = {
-    play: false
-    end: false
+    played: false
   }
   infrastructure = {
-    play: false
+    played: false
+  }
+  scaling = {
+    half2: null
   }
 
 
@@ -50,7 +45,8 @@ class techAnimation
       translateY: [1000, 0]
       duration: 1500
       delay: 100
-    unless intro.play
+    unless intro.played
+      intro.played = true
       animate
         el: '.intro-header'
         easing: 'easeOutCirc'
@@ -76,8 +72,10 @@ class techAnimation
       ), 2000
 
   playInfrastructure = ->
-    if infrastructure.play
-
+    if infrastructure.played
+      $('.load-balancer, .app, .bastion, .database').removeClass('faded')
+      $('.network-container').addClass('disappear')
+      $('#infrastructure .copy').removeClass('disappear')
     else
       # disable scrolling until animation finishes
       # borrowed from apple.com/mac-pro
@@ -171,6 +169,7 @@ class techAnimation
   playGateway = ->
     $('.http, .ssh').addClass('faded')
     setTimeout (-> $('.docker').addClass('faded') ), 100
+    $('#gateway .copy').removeClass('disappear')
     if !network
       network = new Network()
       network.generateNetwork()
@@ -180,27 +179,24 @@ class techAnimation
 
   playNetwork = ->
     $('.http, .load-balancer').removeClass('faded')
+    $('#network .copy').removeClass('disappear')
 
   playApp = ->
     $('.app').removeClass('faded')
+    $('#code .copy').removeClass('disappear')
 
   playBastion = ->
     $('.ssh, .bastion').removeClass('faded')
+    $('#bastion .copy').removeClass('disappear')
 
   playDatabase = ->
     $('.database').removeClass('faded')
+    $('#database .copy').removeClass('disappear')
 
   playScaling = ->
-    $('.load-balancer, .app, .bastion').removeClass('faded')
-    setTimeout (-> network.runHalf2() ), 3000
-
-
-  #
-  # Stop the Animations
-  # These methods stop animations on DOM objects
-  #
-  stopIntro: ->
-    animate.stop '.console'
+    $('.load-balancer, .app, .bastion, .database').removeClass('faded')
+    $('#scale .copy').removeClass('disappear')
+    scaling.half2 = setTimeout (-> network.runHalf2() ), 3000
 
 
   #
@@ -215,7 +211,7 @@ class techAnimation
       translateY: [0, 50]
       opacity: [1, 0]
       duration: 400
-    if infrastructure.play
+    if infrastructure.played
       animate
         el: ".fixed-panel"
         easing: "easeOutQuad"
@@ -257,19 +253,17 @@ class techAnimation
   # These animations fire when before a user scrolls up
   # and views the next slide above
   #
-
   leaveUpInfrastructure = ->
     animate
       el: ".fixed-panel"
       easing: "easeOutQuad"
       opacity: [1, 0]
       duration: 300
+    setTimeout ( -> $('.fixed-console').fadeIn() ), 800
 
   leaveUpGateway = ->
     setTimeout (-> $('#infrastructure .copy').removeClass('disappear') ), 500
     $('.http, .ssh, .load-balancer, .app, .bastion, .database').removeClass('faded')
-    $('.network-container').addClass('disappear')
-
 
   leaveUpNetwork = ->
     setTimeout (-> $('#gateway .copy').removeClass('disappear') ), 500
@@ -297,12 +291,61 @@ class techAnimation
     $('.http, .ssh, .load-balancer, .app, .bastion').addClass('faded')
     network.stop()
 
-  #
-  # Back Animations
-  # These animations fire when a user scrolls up
-  # and views the next slide above
-  #
 
+  #
+  # If diagram animation hasn't finished
+  # this will fast forward the DOM to the correct state
+  # **Only used by the click handlers
+  #
+  finalInfrastructureState = ->
+
+    # Full size customer vpc
+    $('.customer-vpc-dots, .customer-vpc').css(
+      transition: 'all 50ms linear'
+      opacity: 1
+      ).addClass('loaded')
+
+    # Fade out AWS and Aptible Cloud labels
+    $('.aws span.title, aws span.title').css('color', 'rgba(255,255,255,0.1)')
+
+    # Full width private gateway
+    $('.private').css(
+      transition: 'all 50ms linear'
+      opacity: 1
+      ).addClass('loaded')
+
+    # Gatway labels
+    $('.public span, .private span').css('opacity', 1)
+    $('.public .left, .public .right').css('opacity', 1)
+
+    $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+
+    animate
+      el: '.fixed-panel'
+      easing: 'easeOutQuad'
+      opacity: [0, 1]
+      duration: 300
+      delay: 100
+
+    setTimeout (->
+      $('.slides, .fixed-panel').fadeIn()
+      infrastructure.played = true
+      createNetwork()
+    ), 500
+
+
+  updateInfrastructureState = ->
+
+
+  createNetwork = ->
+    if !network
+      network = new Network()
+      network.generateNetwork()
+      network.generateLines()
+
+
+  clickReset = ->
+    $('.copy').addClass('disappear')
 
 
   #
@@ -310,6 +353,155 @@ class techAnimation
   # These animations fire when a user clicks
   # the navigations dots to jump to a slide
   #
+  clickIntro = ->
+    clickReset()
+    if !network
+      finalInfrastructureState()
+    else
+      clearTimeout scaling.half2
+      network.stop()
+      animate
+        el: ".fixed-panel"
+        easing: "easeOutQuad"
+        opacity: [1, 0]
+        duration: 300
+      $('.network-container').addClass('disappear')
+      setTimeout (->
+        $('.slides, .fixed-panel, .fixed-console, .network-container').fadeIn()
+      ), 1000
+
+  clickInfrastructure = ->
+    clickReset()
+    if !network
+      finalInfrastructureState()
+    else
+      clearTimeout scaling.half2
+      network.stop()
+      animate
+        el: ".fixed-panel"
+        easing: "easeOutQuad"
+        opacity: [0, 1]
+        duration: 50
+      $('.network-container').removeClass('disappear')
+      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+      $('.network-container').addClass('disappear')
+      setTimeout (->
+        $('.slides, .fixed-panel, .network-container').fadeIn()
+      ), 1000
+
+  clickGateway = ->
+    clickReset()
+    if !network
+      finalInfrastructureState()
+    else
+      clearTimeout scaling.half2
+      network.stop()
+      animate
+        el: ".fixed-panel"
+        easing: "easeOutQuad"
+        opacity: [0, 1]
+        duration: 50
+      $('.network-container').removeClass('disappear')
+      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+      setTimeout (->
+        $('.slides, .fixed-panel, .network-container').fadeIn()
+      ), 1000
+
+  clickNetwork = ->
+    clickReset()
+    if !network
+      finalInfrastructureState()
+      setTimeout (->  network.runHttp() ), 800
+    else
+      clearTimeout scaling.half2
+      network.stop()
+      animate
+        el: ".fixed-panel"
+        easing: "easeOutQuad"
+        opacity: [0, 1]
+        duration: 50
+      $('.network-container').removeClass('disappear')
+      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+      setTimeout (->
+        $('.slides, .fixed-panel, .network-container').fadeIn()
+        network.runHttp()
+      ), 1000
+
+  clickApp = ->
+    clickReset()
+    if !network
+      finalInfrastructureState()
+    else
+      clearTimeout scaling.half2
+      network.stop()
+      animate
+        el: ".fixed-panel"
+        easing: "easeOutQuad"
+        opacity: [0, 1]
+        duration: 50
+      $('.network-container').removeClass('disappear')
+      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+      setTimeout (->
+        $('.slides, .fixed-panel, .network-container').fadeIn()
+      ), 1000
+
+  clickBastion = ->
+    clickReset()
+    if !network
+      finalInfrastructureState()
+      setTimeout (->  network.runSSH() ), 800
+    else
+      clearTimeout scaling.half2
+      network.stop()
+      animate
+        el: ".fixed-panel"
+        easing: "easeOutQuad"
+        opacity: [0, 1]
+        duration: 50
+      $('.network-container').removeClass('disappear')
+      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+      setTimeout (->
+        $('.slides, .fixed-panel, .network-container').fadeIn()
+        network.runSSH()
+      ), 1000
+
+
+  clickDatabse = ->
+    clickReset()
+    if !network
+      finalInfrastructureState()
+    else
+      clearTimeout scaling.half2
+      network.stop()
+      animate
+        el: ".fixed-panel"
+        easing: "easeOutQuad"
+        opacity: [0, 1]
+        duration: 50
+      $('.network-container').removeClass('disappear')
+      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+      setTimeout (->
+        $('.slides, .fixed-panel, .network-container').fadeIn()
+      ), 1000
+
+  clickScaling = ->
+    clickReset()
+    if !network
+      finalInfrastructureState()
+    else
+      network.stop()
+      animate
+        el: ".fixed-panel"
+        easing: "easeOutQuad"
+        opacity: [0, 1]
+        duration: 50
+      $('.network-container').removeClass('disappear')
+      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+      setTimeout (->
+        $('.slides, .fixed-panel, .network-container').fadeIn()
+        network.runHalf()
+      ), 1000
+
 
 
 
@@ -317,12 +509,12 @@ class techAnimation
   # Animation arrays
   # fullPage.js uses index values to determine
   # its current slide position which corresponds
-  # to these immutable arrays
+  # to these arrays of functions
   #
   play: [playIntro, playInfrastructure, playGateway, playNetwork, playApp, playBastion, playDatabase, playScaling]
   leave: [leaveIntro, leaveInfrastructure, leaveGateway, leaveNetwork, leaveApp, leaveBastion, leaveDatabase, leaveScaling]
   leaveUp: [leaveUpInfrastructure, leaveUpGateway, leaveUpNetwork, leaveUpApp, leaveUpBastion, leaveUpDatabase, leaveUpScaling]
-
+  clickOn: [clickIntro, clickInfrastructure, clickGateway, clickNetwork, clickApp, clickBastion, clickDatabse, clickScaling]
 
 
 

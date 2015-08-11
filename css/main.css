@@ -506,3 +506,18 @@ section.illustration .customer-vpc .private span {
 }
 
 
+@media (max-width: 768px) {
+  .navbar .col-md-10{
+    display: none;
+  }
+  section.illustration .aws {
+    width: 85%;
+    height: 85%;
+    margin: 20px auto;
+  }
+  #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
+    display: none !important;
+  }
+}
+
+

@@ -25,6 +25,9 @@ class techAnimation
   }
   infrastructure = {
     played: false
+    copyAnim: null
+    circleAnim: null
+    privateAnim: null
   }
   scaling = {
     half2: null
@@ -87,7 +90,9 @@ class techAnimation
         translateY: [80, 0]
         duration: 300
         delay: 600
-      setTimeout ( -> $('#infrastructure .copy').removeClass('disappear') ), 400
+      infrastructure.copyAnim = setTimeout ( ->
+        $('#infrastructure .copy').removeClass('disappear')
+      ), 400
       # STEP1: Bounce in and rotate circles
       animate
         el: '.customer-vpc-dots'
@@ -120,12 +125,12 @@ class techAnimation
         duration: 600
         delay: 2000
       # STEP2: Circle Transforms into full-size VPC
-      setTimeout (->
+      infrastructure.circleAnim = setTimeout (->
         $('.loading-circle-1, .loading-circle-2, .loading-text').fadeOut()
         $('.customer-vpc-dots, .customer-vpc').addClass('loaded')
       ), 3000
       setTimeout (->
-        $('.aws span.title, aws span.title').css('color', 'rgba(255,255,255,0.1)')
+        $('.aws span.title').css('color', 'rgba(255,255,255,0.1)')
       ), 3600
       # STEP3: Slide in Private Gateway and Pop in labels
       animate
@@ -134,7 +139,7 @@ class techAnimation
         easing: 'easeOutCirc'
         duration: 400,
         delay: 4000
-      setTimeout ( -> $('.private').addClass('loaded') ), 4200
+      infrastructure.privateAnim = setTimeout ( -> $('.private').addClass('loaded') ), 4200
       animate
         el: '.public span'
         opacity: [0, 1]
@@ -161,9 +166,9 @@ class techAnimation
         duration: 1200
         delay: 7100
       # STEP4: Re-enable scrolling and set played state
-      setTimeout ( ->
+      infrastructure.finalAnim = setTimeout ( ->
         $.fn.fullpage.setAllowScrolling(true)
-        infrastructure.play = true
+        infrastructure.played = true
       ), 7000
 
   playGateway = ->
@@ -343,6 +348,32 @@ class techAnimation
       network.generateNetwork()
       network.generateLines()
 
+  stopInfrastructure = ->
+    animate.stop('.fixed-panel')
+    animate.stop('.customer-vpc-dots')
+    animate.stop('.loading-circle-1')
+    animate.stop('.loading-circle-2')
+    animate.stop('.loading-text')
+    animate.stop('.private')
+    animate.stop('.public span')
+    animate.stop('.private span')
+    animate.stop('.public .left, .public .right')
+    animate.stop('.load-balancer, .app, .bastion, .database')
+
+    $('.fixed-panel, .customer-vpc-dots, .customer-vpc, .private, .public .left, .public .right').attr('style', '')
+
+    clearTimeout infrastructure.copyAnim
+    clearTimeout infrastructure.circleAnim
+    clearTimeout infrastructure.privateAnim
+
+    setTimeout (->
+      $('.loading-circle-1, .loading-circle-2, .loading-text').hide()
+      $('.aws span.title').css('color', 'rgba(255,255,255,0.1)')
+
+      $.fn.fullpage.setAllowScrolling(true)
+      infrastructure.played = true
+    ), 500
+
 
   clickReset = ->
     $('.copy').addClass('disappear')
@@ -467,9 +498,13 @@ class techAnimation
 
 
   clickDatabse = ->
+
+    stopInfrastructure()
     clickReset()
     if !network
-      finalInfrastructureState()
+      setTimeout (->
+        finalInfrastructureState()
+      ), 100
     else
       clearTimeout scaling.half2
       network.stop()

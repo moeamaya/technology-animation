@@ -21,6 +21,45 @@ var Network = function(){
 
 
 
+  var regenerateNetwork = function() {
+    destroyNetwork();
+
+    vpcPosition = $vpc.offset();
+    vpcTop = Math.floor(vpcPosition.top);
+    vpcLeft = Math.floor(vpcPosition.left) + (OFFSET/2);
+    vpcWidth = $vpc.outerWidth() - OFFSET;
+
+    numLines = Math.ceil(vpcWidth / SPACING);
+    halfLines = Math.ceil(numLines * 0.7);
+
+    $networkContainer
+      .css({
+        height: vpcTop + "px",
+        width: vpcWidth,
+        left: vpcLeft + "px"
+      });
+
+    self.generateLines();
+  };
+
+
+  var destroyNetwork = function(){
+    for (var i = 0; i < allLines.length; i++){
+      allLines[i].getDOMObject().remove();
+      delete allLines[i];
+    };
+    httpLines = [];
+    sshLines = [];
+    allLines = [];
+  };
+
+
+
+  $(window).resize(function(){
+    regenerateNetwork();
+  });
+
+
   // -------------------------------
   // Public methods
   // -------------------------------

@@ -363,7 +363,7 @@ class techAnimation
     animate.stop('.public .left, .public .right')
     animate.stop('.load-balancer, .app, .bastion, .database')
 
-    $('.fixed-panel, .customer-vpc-dots, .customer-vpc, .private, .public .left, .public .right').attr('style', '')
+    # $('.fixed-panel, .customer-vpc-dots, .customer-vpc, .private, .public .left, .public .right').attr('style', '')
 
     clearTimeout infrastructure.copyAnim
     clearTimeout infrastructure.circleAnim

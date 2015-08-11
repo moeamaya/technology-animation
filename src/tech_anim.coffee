@@ -34,7 +34,6 @@ $ ->
           techAnim.leave[index - 1].call(this)
         else if (nextIndex - index == -1)
           # index - 2 because the first slide can't be scrolled up
-          console.log 'up'
           techAnim.leaveUp[index - 2].call(this)
 
       afterRender: ->

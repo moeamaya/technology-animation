@@ -6,6 +6,8 @@ html, body {
   background-size: cover;
   background-position: center;
   text-rendering: optimizeLegibility;
+  width: 100%;
+  height: 100%;
 }
 
 header {

@@ -15,7 +15,7 @@ class techAnimation
   # Network Animation Object
   # This var gets set during the Gateway animation or if a
   # user clicks navigation dots since it depends on the position
-  #  and size of <div class="customer-vpc">
+  # and size of <div class="customer-vpc">
   network = null
 
 
@@ -82,7 +82,6 @@ class techAnimation
     else
       # disable scrolling until animation finishes
       # borrowed from apple.com/mac-pro
-      $.fn.fullpage.setAllowScrolling(false)
       animate
         el: '.fixed-panel'
         easing: 'easeOutQuad'
@@ -167,7 +166,6 @@ class techAnimation
         delay: 7100
       # STEP4: Re-enable scrolling and set played state
       infrastructure.finalAnim = setTimeout ( ->
-        $.fn.fullpage.setAllowScrolling(true)
         infrastructure.played = true
       ), 7000
 
@@ -227,6 +225,14 @@ class techAnimation
 
   leaveInfrastructure = ->
     $('#infrastructure .copy').addClass('disappear')
+    unless infrastructure.played
+      $('.fixed-panel').fadeOut(50)
+      stopInfrastructure()
+      clickReset()
+      if !network
+        setTimeout (->
+          finalInfrastructureState()
+        ), 100
 
   leaveGateway = ->
     $('#gateway .copy').addClass('disappear')
@@ -268,6 +274,17 @@ class techAnimation
       duration: 300
     setTimeout ( -> $('.fixed-console').fadeIn() ), 800
 
+    $('#infrastructure .copy').addClass('disappear')
+    unless infrastructure.played
+      $('.fixed-panel').fadeOut(50)
+      stopInfrastructure()
+      clickReset()
+      if !network
+        setTimeout (->
+          finalInfrastructureState()
+        ), 100
+
+
   leaveUpGateway = ->
     setTimeout (-> $('#infrastructure .copy').removeClass('disappear') ), 500
     $('.http, .ssh, .load-balancer, .app, .bastion, .database').removeClass('faded')
@@ -296,6 +313,7 @@ class techAnimation
   leaveUpScaling = ->
     setTimeout (-> $('#database .copy').removeClass('disappear') ), 500
     $('.http, .ssh, .load-balancer, .app, .bastion').addClass('faded')
+    clearTimeout scaling.half2
     network.stop()
 
 
@@ -363,8 +381,6 @@ class techAnimation
     animate.stop('.public .left, .public .right')
     animate.stop('.load-balancer, .app, .bastion, .database')
 
-    # $('.fixed-panel, .customer-vpc-dots, .customer-vpc, .private, .public .left, .public .right').attr('style', '')
-
     clearTimeout infrastructure.copyAnim
     clearTimeout infrastructure.circleAnim
     clearTimeout infrastructure.privateAnim
@@ -372,8 +388,6 @@ class techAnimation
     setTimeout (->
       $('.loading-circle-1, .loading-circle-2, .loading-text').hide()
       $('.aws span.title').css('color', 'rgba(255,255,255,0.1)')
-
-      $.fn.fullpage.setAllowScrolling(true)
       infrastructure.played = true
     ), 500
 
@@ -391,7 +405,9 @@ class techAnimation
     stopInfrastructure()
     clickReset()
     if !network
-      finalInfrastructureState()
+      setTimeout (->
+        finalInfrastructureState()
+      ), 100
     else
       clearTimeout scaling.half2
       network.stop()
@@ -409,7 +425,9 @@ class techAnimation
     stopInfrastructure()
     clickReset()
     if !network
-      finalInfrastructureState()
+      setTimeout (->
+        finalInfrastructureState()
+      ), 100
     else
       clearTimeout scaling.half2
       network.stop()
@@ -429,7 +447,9 @@ class techAnimation
     stopInfrastructure()
     clickReset()
     if !network
-      finalInfrastructureState()
+      setTimeout (->
+        finalInfrastructureState()
+      ), 100
     else
       clearTimeout scaling.half2
       network.stop()
@@ -448,7 +468,9 @@ class techAnimation
     stopInfrastructure()
     clickReset()
     if !network
-      finalInfrastructureState()
+      setTimeout (->
+        finalInfrastructureState()
+      ), 100
       setTimeout (->  network.runHttp() ), 800
     else
       clearTimeout scaling.half2
@@ -469,7 +491,9 @@ class techAnimation
     stopInfrastructure()
     clickReset()
     if !network
-      finalInfrastructureState()
+      setTimeout (->
+        finalInfrastructureState()
+      ), 100
     else
       clearTimeout scaling.half2
       network.stop()
@@ -488,7 +512,9 @@ class techAnimation
     stopInfrastructure()
     clickReset()
     if !network
-      finalInfrastructureState()
+      setTimeout (->
+        finalInfrastructureState()
+      ), 100
       setTimeout (->  network.runSSH() ), 800
     else
       clearTimeout scaling.half2
@@ -531,7 +557,9 @@ class techAnimation
     stopInfrastructure()
     clickReset()
     if !network
-      finalInfrastructureState()
+      setTimeout (->
+        finalInfrastructureState()
+      ), 100
     else
       network.stop()
       animate

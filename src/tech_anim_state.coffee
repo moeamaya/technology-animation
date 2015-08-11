@@ -210,12 +210,14 @@ class techAnimation
   # and views the next slide below
   #
   leaveIntro = ->
+    animate.stop('.console')
     animate
       el: '.console'
       easing: 'easeOutQuad'
       translateY: [0, 50]
       opacity: [1, 0]
       duration: 400
+      delay: 50
     if infrastructure.played
       animate
         el: ".fixed-panel"
@@ -349,6 +351,7 @@ class techAnimation
       network.generateLines()
 
   stopInfrastructure = ->
+    animate.stop('.console')
     animate.stop('.fixed-panel')
     animate.stop('.customer-vpc-dots')
     animate.stop('.loading-circle-1')
@@ -385,6 +388,7 @@ class techAnimation
   # the navigations dots to jump to a slide
   #
   clickIntro = ->
+    stopInfrastructure()
     clickReset()
     if !network
       finalInfrastructureState()
@@ -402,6 +406,7 @@ class techAnimation
       ), 1000
 
   clickInfrastructure = ->
+    stopInfrastructure()
     clickReset()
     if !network
       finalInfrastructureState()
@@ -421,6 +426,7 @@ class techAnimation
       ), 1000
 
   clickGateway = ->
+    stopInfrastructure()
     clickReset()
     if !network
       finalInfrastructureState()
@@ -439,6 +445,7 @@ class techAnimation
       ), 1000
 
   clickNetwork = ->
+    stopInfrastructure()
     clickReset()
     if !network
       finalInfrastructureState()
@@ -459,6 +466,7 @@ class techAnimation
       ), 1000
 
   clickApp = ->
+    stopInfrastructure()
     clickReset()
     if !network
       finalInfrastructureState()
@@ -477,6 +485,7 @@ class techAnimation
       ), 1000
 
   clickBastion = ->
+    stopInfrastructure()
     clickReset()
     if !network
       finalInfrastructureState()
@@ -498,7 +507,6 @@ class techAnimation
 
 
   clickDatabse = ->
-
     stopInfrastructure()
     clickReset()
     if !network
@@ -520,6 +528,7 @@ class techAnimation
       ), 1000
 
   clickScaling = ->
+    stopInfrastructure()
     clickReset()
     if !network
       finalInfrastructureState()

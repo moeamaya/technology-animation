@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "proxima nova";
+  font-family: "proxima nova", "proxima-nova", sans-serif;
   background: url("../img/abstract-header-2.jpg");
   background-size: cover;
   background-position: center;
@@ -64,6 +64,26 @@ h4 {
   color: #ccc;
 }
 
+
+/* Helpers */
+.flex-center {
+  display: -ms-flexbox;
+  display:-webkit-flex;
+  display: flex;
+
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+
+  -ms-flex-align: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+
+
+/* fullpage.css overrides */
 #fp-nav {
   z-index: 2001 !important;
 }
@@ -93,6 +113,7 @@ section.fixed-panel {
 section.fixed-console {
   z-index: 1002;
   position: fixed;
+  top: 60%;
   bottom: 0;
   left: 0;
   right: 0;
@@ -200,7 +221,7 @@ section.illustration .aws .aptible-cloud {
   background: rgba(255, 255, 255, 0.1);
   background: -webkit-linear-gradient(top, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
   padding: 10px 20px 40px;
-  font-size: 12px;
+  font-size: 1em;
   border-radius: 3px;
   color: rgb(80, 164, 239);
   transition: color 800ms ease-in-out,
@@ -246,8 +267,13 @@ section.illustration .aws .aptible-cloud span.title {
   color: #fff;
 }
 .loading-text {
-  opacity: 0;
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  margin-left: -80px;
+  width: 160px;
   color: #fff !important;
+  opacity: 0;
 }
 
 
@@ -264,11 +290,6 @@ section.illustration .aws .aptible-cloud span.title {
   margin: auto;
   border: 1px dashed rgba(255,255,255,0.4);
   opacity: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
 
   transition: border-radius 800ms ease-in-out,
     width 1000ms ease-in-out, height 900ms ease-in-out,
@@ -325,6 +346,7 @@ section.illustration .customer-vpc .public span {
   width: 140px;
   margin-left: -70px;
   opacity: 0;
+  z-index: 1;
 }
 .customer-vpc .public .left,
 .customer-vpc .public .right {
@@ -360,17 +382,9 @@ section.illustration .customer-vpc .public span {
 }
 .customer-vpc .public .left .load-balancer,
 .customer-vpc .public .left .app {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 43%;
-  text-align: center;
-  background: rgba(255, 255, 255, 1);
   margin-top: 3%;
-  color: rgba(80, 164, 239, 1);
-  font-weight: normal;
-  font-size: 18px;
 
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
 
@@ -383,17 +397,9 @@ section.illustration .customer-vpc .public span {
   width: 30%;
 }
 .customer-vpc .public .right .bastion {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 93%;
-  text-align: center;
-  background: rgba(255, 255, 255, 1);
   margin-top: 13%;
-  color: rgba(80, 164, 239, 1);
-  font-weight: normal;
-  font-size: 18px;
 
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
 
@@ -432,21 +438,14 @@ section.illustration .customer-vpc .private span {
   color: rgba(255,255,255,1);
   width: 140px;
   margin-left: -70px;
+  z-index: 1;
 
   opacity: 0;
 }
 .customer-vpc .private .database {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 89%;
-  text-align: center;
   margin-top: 3.5%;
-  background: rgba(255, 255, 255, 1);
-  color: rgba(80, 164, 239, 1);
-  font-weight: normal;
-  font-size: 18px;
 
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
 
@@ -456,6 +455,14 @@ section.illustration .customer-vpc .private span {
   background: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0);
 }
+.docker {
+  text-align: center;
+  background: rgba(255, 255, 255, 1);
+  color: rgba(80, 164, 239, 1);
+  font-weight: normal;
+  font-size: 1.7em;
+}
+
 
 
 .network-container {
@@ -507,17 +514,156 @@ section.illustration .customer-vpc .private span {
 
 
 @media (max-width: 768px) {
+  html, body {
+    font-size: 10px !important;
+  }
+
   .navbar .col-md-10{
     display: none;
+  }
+  header .logo {
+    width: 100px;
+  }
+
+  /* fullpage.js overrides */
+  #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
+    display: none !important;
+  }
+  #fp-nav.left {
+    left: 0 !important;
+  }
+  #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
+    display: none !important;
+  }
+
+  section.fixed-panel {
+    z-index: 1001;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+  }
+  section.fixed-console {
+    z-index: 1002;
+    position: fixed;
+    top: 55%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .slides {
+    z-index: 1003;
+    position: relative;
+  }
+  .console .base {
+    width: 85%;
+    font-size: 1.2em;
+  }
+  .console .base .header {
+    height: 30px;
+  }
+  .console .base .body {
+    padding: 12px;
+  }
+  section.illustration {
+    font-size: 1em;
   }
   section.illustration .aws {
     width: 85%;
     height: 85%;
     margin: 20px auto;
+    padding: 6px 6px 0;
   }
-  #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
-    display: none !important;
+  section.illustration .aws span.title {
+    font-size: 8px;
+    margin: 0 0 2px;
   }
+  section.illustration .aws .aptible-cloud {
+    font-size: 0.8em;
+    padding: 6px 0 0;
+  }
+  section.illustration .customer-vpc .public span,
+  section.illustration .customer-vpc .private span {
+    top: 2px;
+    width: 100px;
+    padding: 4px 0;
+    font-size: 0.9em;
+    margin-left: -50px;
+  }
+
+  .customer-vpc .public .http,
+  .customer-vpc .public .ssh {
+    font-size: 0.7em;
+    top: 10px;
+  }
+  .customer-vpc .public .http {
+    left: 7px;
+  }
+  .customer-vpc .public .ssh {
+    right: 7px;
+  }
+
+  .loading-circle-1 {
+    width: 140px;
+    height: 140px;
+  }
+  .loading-circle-2 {
+    width: 170px;
+    height: 170px;
+  }
+  .customer-vpc-dots {
+    width: 220px;
+    height: 220px;
+  }
+  .customer-vpc {
+    width: 190px;
+    height: 190px;
+  }
+
+  .customer-vpc-dots.loaded {
+    width: 96%;
+    top: 6px;
+  }
+  .customer-vpc.loaded {
+    width: 99%;
+    height: 99%;
+  }
+  .customer-vpc .public .left {
+    width: 65%;
+  }
+  .customer-vpc .public .left .load-balancer {
+    margin-top: 13%;
+  }
+  .customer-vpc .public .right {
+    width: 35%;
+  }
+  .customer-vpc .public .right .bastion {
+    height: 88%;
+    margin-top: 27%;
+  }
+  .customer-vpc .private .database {
+    height: 80%;
+    margin-top: 9%;
+  }
+
+  section.copy {
+    bottom: 6px;
+  }
+  section.copy h2 {
+    font-size: 2em;
+    margin: 8px 0 8px;
+  }
+
+  #intro .copy h1 {
+    margin-top: 40%;
+  }
+
+  .docker {
+    font-size: 1.4em;
+  }
+
 }
 
 

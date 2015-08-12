@@ -551,7 +551,7 @@ section.illustration .customer-vpc .private span img {
     display: none !important;
   }
   #fp-nav.left {
-    left: 0 !important;
+    left: 10px !important;
   }
   #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
     display: none !important;
@@ -561,17 +561,10 @@ section.illustration .customer-vpc .private span img {
 
   section.fixed-panel {
     z-index: 1001;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    opacity: 0;
   }
   section.fixed-console {
     z-index: 1002;
     position: fixed;
-    top: 55%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -580,7 +573,9 @@ section.illustration .customer-vpc .private span img {
     z-index: 1003;
     position: relative;
   }
-
+  section.illustration {
+    padding-top: 100px;
+  }
   section.illustration .aws {
     width: 85%;
     height: 85%;
@@ -600,21 +595,14 @@ section.illustration .customer-vpc .private span img {
     height: 99%;
   }
 
-  .customer-vpc .public .left .app img,
-  .customer-vpc .public .left .load-balancer img,
-  .customer-vpc .public .right .bastion img,
-  .customer-vpc .private .database img {
-    width: 20px;
-    height: 20px;
+  #intro .copy h1 {
+    font-size: 4em;
+    margin-top: 40%;
   }
 
-  .docker img.margin-right {
-    margin-right: 3px;
+  section.copy {
+    bottom: 40px;
   }
-  .docker img.margin-bottom {
-    margin-bottom: 3px;
-  }
-
 
 }
 
@@ -789,11 +777,24 @@ section.illustration .customer-vpc .private span img {
   .docker {
     font-size: 1.1em;
   }
+  .customer-vpc .public .left .app img,
+  .customer-vpc .public .left .load-balancer img,
+  .customer-vpc .public .right .bastion img,
+  .customer-vpc .private .database img {
+    width: 20px;
+    height: 20px;
+  }
+  .docker img.margin-right {
+    margin-right: 3px;
+  }
+  .docker img.margin-bottom {
+    margin-bottom: 3px;
+  }
 
 }
 
 /* Bump the text up on iPhone 6 & 6+ */
-@media (max-width: 767px) and (max-height: 665px) {
+@media (max-width: 991px) and (max-height: 736px) and (min-height: 481px) {
   section.illustration {
     padding-top: 40px;
   }

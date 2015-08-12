@@ -172,6 +172,7 @@ section.fixed-console {
 #intro .copy h3 {
   font-size: 1.7em;
   font-weight: 300;
+  line-height: 1.3;
   color: rgba(255, 255, 255, 0.5);
   opacity: 0;
 }
@@ -179,13 +180,13 @@ section.fixed-console {
 
 
 section.illustration {
-  height: 75%;
-  padding-top: 70px;
+  height: 72%;
+  padding-top: 75px;
 }
 section.copy {
   position: absolute;
   width: 100%;
-  bottom: 3%;
+  bottom: 15px;
   transition: opacity 100ms ease-in;
 }
 section.copy.disappear {
@@ -193,15 +194,18 @@ section.copy.disappear {
 }
 
 section.copy h2 {
-  font-size: 2.4em;
+  font-size: 2.2em;
+  margin-bottom: 0.2em;
   color: rgba(255, 255, 255, 1.0);
 }
 section.copy p {
-  font-size: 1.3em;
-  line-height: 1.6;
+  font-size: 1.25em;
+  line-height: 1.5;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.6);
 }
+
+
 
 section.illustration .aws {
   background: rgba(255, 255, 255, 0.1);
@@ -212,7 +216,6 @@ section.illustration .aws {
   border-radius: 6px;
   margin-top: 0px;
   padding: 10px 20px 0;
-  /*font-weight: bold;*/
   font-size: 12px;
   margin: 0 auto;
   text-align: center;
@@ -536,6 +539,9 @@ section.illustration .customer-vpc .private span img {
 }
 
 
+
+
+
 /*----------------------------------
   Medium devices: iPad
 ------------------------------------*/
@@ -646,7 +652,7 @@ section.illustration .customer-vpc .private span img {
   section.fixed-console {
     z-index: 1;
     position: fixed;
-    top: 55%;
+    top: 60%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -657,17 +663,17 @@ section.illustration .customer-vpc .private span img {
   }
   .console .base {
     width: 85%;
-    font-size: 1.2em;
+    font-size: 1em;
   }
   .console .base .header {
-    height: 30px;
+    height: 26px;
   }
   .console .base .body {
     padding: 12px;
   }
   section.illustration {
     font-size: 1em;
-    height: 77%;
+    height: 75%;
     padding-top: 30px;
   }
   section.illustration .aws {
@@ -742,40 +748,41 @@ section.illustration .customer-vpc .private span img {
     width: 65%;
   }
   .customer-vpc .public .left .load-balancer {
-    margin-top: 13%;
+    margin-top: 18px;
   }
   .customer-vpc .public .right {
     width: 35%;
   }
   .customer-vpc .public .right .bastion {
     height: 88%;
-    margin-top: 27%;
+    margin-top: 18px;
   }
   .customer-vpc .private .database {
     height: 80%;
-    margin-top: 9%;
+    margin-top: 18px;
   }
 
   section.copy {
     bottom: 0;
   }
   section.copy h2 {
-    font-size: 1.8em;
-    margin: 6px 0 6px;
+    font-size: 1.6em;
+    margin: 4px 0 4px;
   }
   section.copy p {
-    font-style: 0.7em;
+    font-size: 1.2em;
     margin-bottom: 6px;
+    line-height: 1.3;
   }
 
 
   #intro .copy h1 {
-    font-size: 4em;
-    margin-top: 40%;
+    font-size: 3em;
+    margin-top: 35%;
   }
 
   .docker {
-    font-size: 1.1em;
+    font-size: 1em;
   }
   .customer-vpc .public .left .app img,
   .customer-vpc .public .left .load-balancer img,

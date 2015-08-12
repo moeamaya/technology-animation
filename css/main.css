@@ -108,7 +108,7 @@ h4 {
 
 
 section.fixed-panel {
-  z-index: 1001;
+  z-index: 0;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -117,7 +117,7 @@ section.fixed-panel {
   opacity: 0;
 }
 section.fixed-console {
-  z-index: 1002;
+  z-index: 1;
   position: fixed;
   top: 60%;
   bottom: 0;
@@ -126,12 +126,13 @@ section.fixed-console {
 }
 .console {
   width: 100%;
-  height: 30%;
+  height: 100%;
   opacity: 0;
 }
 .console .base {
-  height: 360px;
-  width: 60%;
+  height: 100%;
+  width: 70%;
+  max-width: 650px;
   background: #223e4e;
   border-radius: 3px;
   box-shadow: 0 0 18px rgba(0, 0, 0, 0.12);
@@ -154,6 +155,8 @@ section.fixed-console {
 
 .slides {
   opacity: 0;
+  position: relative;
+  z-index: 2;
 }
 
 
@@ -177,12 +180,12 @@ section.fixed-console {
 
 section.illustration {
   height: 75%;
-  padding-top: 7%;
+  padding-top: 70px;
 }
 section.copy {
   position: absolute;
   width: 100%;
-  bottom: 5%;
+  bottom: 3%;
   transition: opacity 100ms ease-in;
 }
 section.copy.disappear {
@@ -203,7 +206,8 @@ section.copy p {
 section.illustration .aws {
   background: rgba(255, 255, 255, 0.1);
   background: -webkit-linear-gradient(top, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
-  width: 60%;
+  width: 70%;
+  max-width: 800px;
   height: 100%;
   border-radius: 6px;
   margin-top: 0px;
@@ -397,7 +401,7 @@ section.illustration .customer-vpc .public span {
   opacity: 0;
 }
 .customer-vpc .public .left .load-balancer {
-  margin-top: 5%;
+  margin-top: 21px;
 }
 .customer-vpc .public .right {
   width: 30%;
@@ -405,7 +409,7 @@ section.illustration .customer-vpc .public span {
 .customer-vpc .public .right .bastion {
   width: 100%;
   height: 93%;
-  margin-top: 13%;
+  margin-top: 21px;
 
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
 
@@ -460,7 +464,6 @@ section.illustration .customer-vpc .private span {
   width: 160px;
   margin-left: -80px;
   z-index: 1;
-
   opacity: 0;
 }
 section.illustration .customer-vpc .private span img {
@@ -469,10 +472,8 @@ section.illustration .customer-vpc .private span img {
 .customer-vpc .private .database {
   width: 100%;
   height: 89%;
-  margin-top: 3.5%;
-
+  margin-top: 23px;
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
-
   opacity: 0;
 }
 .customer-vpc .private .database.faded {
@@ -501,7 +502,6 @@ section.illustration .customer-vpc .private span img {
 .network-container.disappear {
   opacity: 0;
 }
-
 .network-line {
   position: absolute;
   width: 1px;
@@ -509,7 +509,6 @@ section.illustration .customer-vpc .private span img {
   top: 0;
   background: rgba(170, 222, 237, 0.15);
 }
-
 .network-line .active {
   position: absolute;
   width: 1px;
@@ -519,13 +518,9 @@ section.illustration .customer-vpc .private span img {
   background: rgba(170, 222, 237, 0.5);
   transform: scaleY(0);
   transform-origin: 0% 0%;
-
   transition: opacity 200ms ease-in-out;
-
   opacity: 0;
 }
-
-
 .network-line .dot {
   position: absolute;
   width: 5px;
@@ -541,17 +536,15 @@ section.illustration .customer-vpc .private span img {
 }
 
 
-@media (max-width: 768px) {
-  html, body {
-    font-size: 10px !important;
-  }
+/*----------------------------------
+  Medium devices: iPad
+------------------------------------*/
 
+@media (max-width: 991px) {
   .navbar .col-md-10{
     display: none;
   }
-  header .logo {
-    width: 100px;
-  }
+
 
   /* fullpage.js overrides */
   #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
@@ -563,6 +556,8 @@ section.illustration .customer-vpc .private span img {
   #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
     display: none !important;
   }
+
+
 
   section.fixed-panel {
     z-index: 1001;
@@ -585,6 +580,93 @@ section.illustration .customer-vpc .private span img {
     z-index: 1003;
     position: relative;
   }
+
+  section.illustration .aws {
+    width: 85%;
+    height: 85%;
+    margin: 20px auto;
+    padding: 10px 10px 0;
+  }
+  section.illustration .aws .aptible-cloud {
+    padding: 10px 0 0;
+  }
+
+  .customer-vpc-dots.loaded {
+    width: 98%;
+    top: 10px;
+  }
+  .customer-vpc.loaded {
+    width: 99%;
+    height: 99%;
+  }
+
+  .customer-vpc .public .left .app img,
+  .customer-vpc .public .left .load-balancer img,
+  .customer-vpc .public .right .bastion img,
+  .customer-vpc .private .database img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .docker img.margin-right {
+    margin-right: 3px;
+  }
+  .docker img.margin-bottom {
+    margin-bottom: 3px;
+  }
+
+
+}
+
+/*----------------------------------
+  Small devices: iPhone 6+ and below
+------------------------------------*/
+
+@media (max-width: 767px) {
+  html, body {
+    font-size: 10px !important;
+  }
+
+  .navbar .col-md-10{
+    display: none;
+  }
+  header .logo {
+    width: 100px;
+  }
+
+  /* fullpage.js overrides */
+  #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
+    display: none !important;
+  }
+  #fp-nav.left {
+    left: 0 !important;
+  }
+  #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
+    display: none !important;
+  }
+
+
+  section.fixed-panel {
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+  }
+  section.fixed-console {
+    z-index: 1;
+    position: fixed;
+    top: 55%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .slides {
+    z-index: 2;
+    position: relative;
+  }
   .console .base {
     width: 85%;
     font-size: 1.2em;
@@ -597,6 +679,8 @@ section.illustration .customer-vpc .private span img {
   }
   section.illustration {
     font-size: 1em;
+    height: 77%;
+    padding-top: 30px;
   }
   section.illustration .aws {
     width: 85%;
@@ -619,6 +703,14 @@ section.illustration .customer-vpc .private span img {
     padding: 4px 0;
     font-size: 0.9em;
     margin-left: -50px;
+  }
+  section.illustration .customer-vpc .private span {
+    width: 120px;
+    margin-left: -60px;
+  }
+  section.illustration .customer-vpc .private span img {
+    width: 12px;
+    height: 12px;
   }
 
   .customer-vpc .public .http,
@@ -677,19 +769,25 @@ section.illustration .customer-vpc .private span img {
   }
 
   section.copy {
-    bottom: 6px;
+    bottom: 0;
   }
   section.copy h2 {
-    font-size: 2em;
-    margin: 8px 0 8px;
+    font-size: 1.8em;
+    margin: 6px 0 6px;
+  }
+  section.copy p {
+    font-style: 0.7em;
+    margin-bottom: 6px;
   }
 
+
   #intro .copy h1 {
+    font-size: 4em;
     margin-top: 40%;
   }
 
   .docker {
-    font-size: 1.4em;
+    font-size: 1.1em;
   }
 
 }

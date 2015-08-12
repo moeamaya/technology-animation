@@ -1,8 +1,8 @@
 var Network = function(){
   var self = Object.create(Network.prototype);
 
-  var OFFSET = 38; // in pixels, inner-offset from vpc box
-  var SPACING = 20; // spacing between network lines
+  var OFFSET = 32; // in pixels, inner-offset from vpc box
+  var SPACING = 16; // spacing between network lines
 
   var $networkContainer;
 

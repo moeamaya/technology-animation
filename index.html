@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Our Technology | Aptible</title>
+    <title>Technology | Aptible</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -38,8 +38,6 @@
               <li>PRICING</li>
               <li>TECHNOLOGY</li>
               <li>COMPLIANCE</li>
-              <li>COMPANY</li>
-              <li>SUPPORT</li>
               <li>SIGN UP</li>
               <li>LOG IN</li>
             </ul>
@@ -59,37 +57,37 @@
             <div class="customer-vpc-dots">
               <div class="customer-vpc">
                 <div class="public">
-                  <span>PUBLIC GATEWAY</span>
+                  <span>PUBLIC SUBNET</span>
                   <div class="left">
                     <div class="http">HTTP/HTTPS</div>
                     <div class="load-balancer docker flex-center">
                       <img class="margin-right" src="img/load-balancer-icon.svg">
-                      Load Balancing Layer
+                      Secure Load Balancing
                     </div>
                     <div class="app docker flex-center">
                       <img class="margin-right" src="img/app-icon.svg">
-                      Application Layer
+                      Apps
                     </div>
                   </div>
                   <div class="right">
                     <div class="ssh">SSH</div>
                     <div class="bastion docker flex-center flex-column">
                       <img class="margin-bottom" src="img/bastion-icon.svg">
-                      Bastion Layer
+                      Admin Access
                     </div>
                   </div>
                 </div>
                 <div class="private">
-                  <span><img src="img/lock-icon.svg">PRIVATE GATEWAY</span>
+                  <span><img src="img/lock-icon.svg">PRIVATE SUBNET</span>
                   <div class="database docker flex-center">
                     <img class="margin-right" src="img/database-icon.svg">
-                    Secure Database
+                    Secure Databases
                   </div>
                 </div>
               </div>
 
               <span class="loading-text">
-                CREATING<br>CUSTOMER VPC
+                CREATING<br>YOUR VPC
               </span>
 
               <div class="loading-circle-1"></div>
@@ -125,8 +123,8 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-10 col-xs-offset-1 text-center">
-                <h1 class="intro-header">Technology</h1>
-                <h3 class="intro-text">Deploy into HIPAA-compliant environments in one line</h3>
+                <h1 class="intro-header">Aptible Container Platform</h1>
+                <h3 class="intro-text">Deploy Docker containers into secure, isolated, HIPAA-ready environments.</h3>
               </div>
             </div>
           </div>
@@ -134,38 +132,22 @@
       </section>
 
 
-      <!-- Infrastructure -->
+      <!-- Stack -->
       <section class="section" id="infrastructure">
         <section class="copy disappear">
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                <h2>Aptible Infrastructure</h2>
+                <h2>Aptible Container Platform</h2>
               </div>
               <div class="col-sm-12 col-md-8 col-md-offset-2">
-                <p>You get your own isolated private environment to deploy highly available, scalable applications and database. The Aptible Dedicated Cloud sits on Amazon AWS servers</p>
+                <p>The Aptible Container Platform is a deployment platform designed to securely deploy Docker containers into HIPAA-ready environments. We manage zero-downtime deployments, scale your clusters, encrypt and back up your data, and run your ops, allowing you to focus on development.</p>
               </div>
             </div>
           </div>
         </section>
       </section>
 
-
-      <!-- Gateway -->
-      <section class="section" id="gateway">
-        <section class="copy">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <h2>Public/Private Gateway</h2>
-              </div>
-              <div class="col-md-8 col-md-offset-2">
-                <p>We've architected everything carefully to give the minimum amount of "surface area" to every component of the infrastructure</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
 
       <!-- Network -->
       <section class="section" id="network">
@@ -173,74 +155,90 @@
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                <h2>HTTP/HTTPS Access: Load Balancing Layer</h2>
+                <h2>Secure Networks</h2>
               </div>
               <div class="col-md-8 col-md-offset-2">
-                <p>The load balancing layers scales traffic across available app containers, enabling greater fault tolerance. HTTPS traffic is secured using industry best practices for SSL/TLS.</p>
+                <p>Each PHI-ready stack runs in its own AWS Virtual Private Cloud. Databases and internal services run in a private subnet, inaccessible from the Internet. All stack instances are configured with deny-by-default firewalls.</p>
               </div>
             </div>
           </div>
         </section>
       </section>
 
-      <!-- Code -->
-      <section class="section" id="code">
+      <!-- Load Balancing -->
+      <section class="section" id="load-balancing">
         <section class="copy">
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                <h2>Application Code</h2>
+                <h2>Easy, Secure Load Balancing</h2>
               </div>
               <div class="col-md-8 col-md-offset-2">
-                <p>Application code runs in Docker containers in the app layer. Applications are highly portable across dev, testing, staging and production environments.</p>
+                <p>Each SSL/TLS endpoint receives a dedicated load balancer, scaling traffic across your app containers. SSL/TLS endpoints make it easy to manage x509 SSL/TLS certificates, force SSL/TLS connections, and create private services. Each endpoint receives automatic security updates on a regular basis.</p>
               </div>
             </div>
           </div>
         </section>
       </section>
 
-      <!-- Bastion -->
+      <!-- Apps -->
+      <section class="section" id="apps">
+        <section class="copy">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h2>Designed for Portability</h2>
+              </div>
+              <div class="col-md-8 col-md-offset-2">
+                <p>Achieve dev/prod parity by standardizing your apps across environments. Support for Docker and the most popular open source languages, frameworks, and databases means you never have to worry about lock-in.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Team Access -->
       <section class="section" id="bastion">
         <section class="copy">
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                <h2>SSH Access: Bastion Layer</h2>
+                <h2>Easy Developer Access</h2>
               </div>
               <div class="col-md-8 col-md-offset-2">
-                <p>Bastion run in a private subnet, hidden from the outside Internet. Access is restriced to the app & bastion layers. Traffic to-from the database layer is encrypted within the network.</p>
+                <p>Robust role-based access controls make it easy to authorize and audit your team's activity. Use the CLI tool or web dashboard to manage your stack, including SSH and tunnel access. Script and automate common actions with our ops API.</p>
               </div>
             </div>
           </div>
         </section>
       </section>
 
-      <!-- Database -->
+      <!-- Databases -->
       <section class="section" id="database">
         <section class="copy">
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                <h2>Secure Database Layer</h2>
+                <h2>Secure Databases</h2>
               </div>
               <div class="col-md-8 col-md-offset-2">
-                <p>Databases run in a private subnet, hidden from the outside Internet. Access is restriced to the app & bastion layers. Traffic to-from the database layer is encrypted within the network.</p>
+                <p>Databases run in a private subnet, hidden from the outside Internet. Access is restriced to your apps and team members. Database traffic is encrypted in transit, and data is encrtpyed at rest, using FIPS 140-2 approved modules and Aptible-managed keys. Nightly backups are automatically taken and stored in a separate geographic region.</p>
               </div>
             </div>
           </div>
         </section>
       </section>
 
-      <!-- Scale -->
+      <!-- Scaling -->
       <section class="section" id="scale">
         <section class="copy">
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                <h2>Scale Apps and Databases</h2>
+                <h2>Perform at Scale</h2>
               </div>
               <div class="col-md-8 col-md-offset-2">
-                <p>The load balancing layers scales traffic across available app containers, enabling greater fault tolerance. HTTPS traffic is secured using industry best practices for SSL/TLS.</p>
+                <p>Easily scale apps, domains, and databases with the security and reliability of the AWS cloud. Because your PHI-ready stacks are dedicated to you, the Aptible Container Service has no performance tradeoff. Zero-downtime deploys make scaling seamless.</p>
               </div>
             </div>
           </div>

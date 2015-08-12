@@ -16,7 +16,7 @@ $ ->
       css3: true
       navigation: true
       navigationPosition: 'left'
-      navigationTooltips: ['', 'Infrastructure', 'Gateway', 'Load Balancing', 'Application', 'Bastion', 'Database', 'Scaling']
+      navigationTooltips: ['', 'Stack', 'Network', 'Secure Load Balancing', 'Apps', 'Team Access', 'Databases', 'Scaling']
       showActiveTooltip: true
       keyboardScrolling: false
 

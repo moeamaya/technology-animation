@@ -212,7 +212,7 @@ section.illustration .aws {
   border-radius: 6px;
   margin-top: 0px;
   padding: 10px 20px 0;
-  font-weight: bold;
+  /*font-weight: bold;*/
   font-size: 12px;
   margin: 0 auto;
   text-align: center;

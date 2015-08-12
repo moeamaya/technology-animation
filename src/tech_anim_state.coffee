@@ -71,7 +71,7 @@ class techAnimation
       setTimeout (->
         intro.play = true
         $src = $ '.b1-text'
-        Helpers.typeConsole 'aptible apps:create test-app', $src
+        Helpers.typeConsole 'aptible account:create', $src
       ), 2000
 
   playInfrastructure = ->
@@ -173,7 +173,7 @@ class techAnimation
   playGateway = ->
     $('.http, .ssh').addClass('faded')
     setTimeout (-> $('.docker').addClass('faded') ), 100
-    $('#gateway .copy').removeClass('disappear')
+    $('#network .copy').removeClass('disappear')
     if !network
       network = new Network()
       network.generateNetwork()
@@ -183,11 +183,11 @@ class techAnimation
 
   playNetwork = ->
     $('.http, .load-balancer').removeClass('faded')
-    $('#network .copy').removeClass('disappear')
+    $('#load-balancing .copy').removeClass('disappear')
 
   playApp = ->
     $('.app').removeClass('faded')
-    $('#code .copy').removeClass('disappear')
+    $('#apps .copy').removeClass('disappear')
 
   playBastion = ->
     $('.ssh, .bastion').removeClass('faded')
@@ -237,16 +237,16 @@ class techAnimation
         ), 100
 
   leaveGateway = ->
-    $('#gateway .copy').addClass('disappear')
+    $('#network .copy').addClass('disappear')
     network.runHttp()
 
   leaveNetwork = ->
-    $('#network .copy').addClass('disappear')
+    $('#load-balancing .copy').addClass('disappear')
     $('.http, .load-balancer').addClass('faded')
     network.stop()
 
   leaveApp = ->
-    $('#code .copy').addClass('disappear')
+    $('#apps .copy').addClass('disappear')
     $('.app').addClass('faded')
     network.runSSH()
 
@@ -292,17 +292,17 @@ class techAnimation
     $('.http, .ssh, .load-balancer, .app, .bastion, .database').removeClass('faded')
 
   leaveUpNetwork = ->
-    setTimeout (-> $('#gateway .copy').removeClass('disappear') ), 500
+    setTimeout (-> $('#network .copy').removeClass('disappear') ), 500
     $('.http, .load-balancer').addClass('faded')
     network.stop()
 
   leaveUpApp = ->
-    setTimeout (-> $('#network .copy').removeClass('disappear') ), 500
+    setTimeout (-> $('#load-balancing .copy').removeClass('disappear') ), 500
     $('.app').addClass('faded')
     network.runHttp()
 
   leaveUpBastion = ->
-    setTimeout (-> $('#code .copy').removeClass('disappear') ), 500
+    setTimeout (-> $('#apps .copy').removeClass('disappear') ), 500
     $('.bastion').addClass('faded')
     $('.ssh').addClass('faded')
     network.stop()

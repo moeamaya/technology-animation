@@ -79,6 +79,7 @@ class techAnimation
       $('.load-balancer, .app, .bastion, .database').removeClass('faded')
       $('.network-container').addClass('disappear')
       $('#infrastructure .copy').removeClass('disappear')
+      $('.aws span.title').css('color', 'rgba(255,255,255,0.3)')
     else
       # disable scrolling until animation finishes
       # borrowed from apple.com/mac-pro
@@ -129,7 +130,7 @@ class techAnimation
         $('.customer-vpc-dots, .customer-vpc').addClass('loaded')
       ), 3000
       setTimeout (->
-        $('.aws span.title').css('color', 'rgba(255,255,255,0.1)')
+        $('.aws span.title').css('color', 'rgba(255,255,255,0.3)')
       ), 3600
       # STEP3: Slide in Private Gateway and Pop in labels
       animate
@@ -217,6 +218,7 @@ class techAnimation
       duration: 400
       delay: 50
     if infrastructure.played
+      $('.fixed-panel').fadeIn(50)
       animate
         el: ".fixed-panel"
         easing: "easeOutQuad"
@@ -281,7 +283,7 @@ class techAnimation
       clickReset()
       if !network
         setTimeout (->
-          finalInfrastructureState()
+          finalInfrastructureState(false)
         ), 100
 
 
@@ -322,7 +324,7 @@ class techAnimation
   # this will fast forward the DOM to the correct state
   # **Only used by the click handlers
   #
-  finalInfrastructureState = ->
+  finalInfrastructureState = (show = true) ->
 
     # Full size customer vpc
     $('.customer-vpc-dots, .customer-vpc').css(
@@ -353,7 +355,10 @@ class techAnimation
       delay: 100
 
     setTimeout (->
-      $('.slides, .fixed-panel').fadeIn()
+      console.log(show)
+      if show
+        $('.fixed-panel').fadeIn()
+      $('.slides').fadeIn()
       infrastructure.played = true
       createNetwork()
     ), 500

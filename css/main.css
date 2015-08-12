@@ -792,4 +792,19 @@ section.illustration .customer-vpc .private span img {
 
 }
 
+/* Bump the text up on iPhone 6 & 6+ */
+@media (max-width: 767px) and (max-height: 665px) {
+  section.illustration {
+    padding-top: 40px;
+  }
+  section.copy {
+    bottom: 24px;
+  }
+  section.copy h2 {
+    font-size: 2.2em;
+    margin: 6px 0 6px;
+  }
+
+
+}
 

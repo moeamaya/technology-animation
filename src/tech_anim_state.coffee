@@ -15,8 +15,7 @@ class techAnimation
 
   # TODO (perf worth it? runs great on iphone 5s)
   # Very partial variable list
-  awsTitle = $ '.aws .title'
-  aptibleTitle = $ '.aptible-cloud .title'
+  awsTitle = $ '.diagram .title'
 
   fixedDiagram = $ '.fixed-diagram'
 

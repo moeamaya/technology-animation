@@ -67,7 +67,10 @@ h4 {
 }
 
 
-/* Helpers */
+/*----------------------------------
+  Helpers
+------------------------------------*/
+
 .flex-center {
   display: -ms-flexbox;
   display:-webkit-flex;
@@ -89,7 +92,10 @@ h4 {
 }
 
 
-/* fullpage.css overrides */
+/*----------------------------------
+  fullpages.css overrides
+------------------------------------*/
+
 #fp-nav {
   z-index: 2001 !important;
 }
@@ -106,17 +112,11 @@ h4 {
 
 
 
+/*----------------------------------
+  Fixed Console
+------------------------------------*/
 
-section.fixed-panel {
-  z-index: 0;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-}
-section.fixed-console {
+.fixed-console {
   z-index: 1;
   position: fixed;
   top: 60%;
@@ -142,16 +142,21 @@ section.fixed-console {
   transform: translateY(20px);
   margin: auto;
 }
-.console .base .header {
+.console .header {
   width: 100%;
   height: 44px;
   background: rgba(56, 133, 222, 1.0);
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
 }
-.console .base .body {
+.console .body {
   padding: 24px 24px;
 }
+
+
+/*----------------------------------
+  Static Slides
+------------------------------------*/
 
 .slides {
   opacity: 0;
@@ -159,9 +164,31 @@ section.fixed-console {
   z-index: 2;
 }
 
+.copy {
+  position: absolute;
+  width: 100%;
+  bottom: 15px;
+  transition: opacity 100ms ease-in;
+}
+.copy.disappear {
+  opacity: 0;
+}
+
+.copy h2 {
+  font-size: 2.2em;
+  margin-bottom: 0.2em;
+  color: rgba(255, 255, 255, 1.0);
+}
+.copy p {
+  font-size: 1.25em;
+  line-height: 1.5;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6);
+}
 
 #intro .copy {
   height: 60%;
+  bottom: 35%;
 }
 #intro .copy h1 {
   margin-top: 20%;
@@ -177,37 +204,35 @@ section.fixed-console {
   opacity: 0;
 }
 
+#signup .copy {
+  bottom: 70px;
+}
+#signup .copy h2 {
+  font-size: 2.6em;
+  margin-bottom: 0.6em;
+}
 
 
-section.illustration {
-  height: 72%;
-  padding-top: 75px;
-}
-section.copy {
-  position: absolute;
-  width: 100%;
-  bottom: 15px;
-  transition: opacity 100ms ease-in;
-}
-section.copy.disappear {
+/*----------------------------------
+  Fixed Diagram
+------------------------------------*/
+
+.fixed-diagram {
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   opacity: 0;
 }
 
-section.copy h2 {
-  font-size: 2.2em;
-  margin-bottom: 0.2em;
-  color: rgba(255, 255, 255, 1.0);
-}
-section.copy p {
-  font-size: 1.25em;
-  line-height: 1.5;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.6);
+.diagram {
+  height: 72%;
+  padding-top: 75px;
 }
 
-
-
-section.illustration .aws {
+.diagram .aws {
   background: rgba(255, 255, 255, 0.1);
   background: -webkit-linear-gradient(top, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
   width: 70%;
@@ -220,14 +245,14 @@ section.illustration .aws {
   margin: 0 auto;
   text-align: center;
 }
-section.illustration .aws span.title {
+.diagram span.title {
   display: block;
   margin: 0 0 5px;
   color: rgba(255, 255, 255, 0.2);
   transition: color 600ms ease-in-out;
 }
 
-section.illustration .aws .aptible-cloud {
+.diagram .aptible-cloud {
   position: relative;
   width: 100%;
   height: 100%;
@@ -240,58 +265,16 @@ section.illustration .aws .aptible-cloud {
   transition: color 800ms ease-in-out,
     box-shadow 300ms ease-in-out;
 }
-section.illustration .aws .aptible-cloud.gray {
+.diagram .aptible-cloud.gray {
   color: rgb(204, 204, 204);
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
 }
-section.illustration .aws .aptible-cloud span.title {
+.diagram .aptible-cloud span.title {
   color: rgba(255, 255, 255, 0.4);
   transition: color 600ms ease-in-out;
 }
 
-
-.loading-circle-1 {
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  border: 2px dashed rgba(255,255,255,0.3);
-  opacity: 0;
-}
-.loading-circle-2 {
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  border: 1px dashed rgba(255,255,255,0.7);
-
-  opacity: 0;
-
-  color: #fff;
-}
-.loading-text {
-  position: absolute;
-  top: 43%;
-  left: 50%;
-  margin-left: -80px;
-  width: 160px;
-  color: #fff !important;
-  opacity: 0;
-}
-
-
-
-.customer-vpc-dots {
+.diagram .customer-vpc-dots {
   position: absolute;
   width: 360px;
   height: 360px;
@@ -309,7 +292,7 @@ section.illustration .aws .aptible-cloud span.title {
     border 1000ms ease-in-out, margin 900ms ease-in-out,
     top 1000ms ease-in-out
 }
-.customer-vpc-dots.loaded {
+.diagram .customer-vpc-dots.loaded {
   width: 95%;
   height: 90%;
   border: 2px dotted rgba(255,255,255,0.1);
@@ -318,7 +301,7 @@ section.illustration .aws .aptible-cloud span.title {
   bottom: 0px;
 }
 
-.customer-vpc {
+.diagram .customer-vpc {
   position: absolute;
   text-align: center;
   width: 240px;
@@ -334,7 +317,7 @@ section.illustration .aws .aptible-cloud span.title {
     width 1000ms ease-in-out, height 900ms ease-in-out,
     border 800ms ease-in-out, background 900ms ease-in-out
 }
-.customer-vpc.loaded {
+.diagram .customer-vpc.loaded {
   width: 98%;
   height: 97%;
   border-radius: 2px;
@@ -342,13 +325,11 @@ section.illustration .aws .aptible-cloud span.title {
   background: rgba(170, 222, 237, 0.2);
 }
 
-
-
-.customer-vpc .public {
+.diagram .public {
   height: 60%;
   width: 100%;
 }
-section.illustration .customer-vpc .public span {
+.diagram .public span {
   display: inline-block;
   position: absolute;
   left: 50%;
@@ -361,8 +342,8 @@ section.illustration .customer-vpc .public span {
   opacity: 0;
   z-index: 1;
 }
-.customer-vpc .public .left,
-.customer-vpc .public .right {
+.diagram .left,
+.diagram .right {
   display: inline-block;
   height: 100%;
   padding: 3%;
@@ -370,93 +351,90 @@ section.illustration .customer-vpc .public span {
 
   opacity: 0;
 }
-.customer-vpc .public .http,
-.customer-vpc .public .ssh {
+.diagram .http,
+.diagram .ssh {
   position: absolute;
   color: rgba(255, 255, 255, 1);
   top: 20px;
-
   transition: color 900ms ease-in-out, opacity 900ms ease-in-out;
 }
-.customer-vpc .public .http {
+.diagram .http {
   left: 24px;
 }
-.customer-vpc .public .ssh {
+.diagram .ssh {
   right: 24px;
 }
-.customer-vpc .public .http.faded,
-.customer-vpc .public .ssh.faded {
+.diagram .http.faded,
+.diagram .ssh.faded {
   opacity: 0.1;
 }
 
-.customer-vpc .public .left {
+.diagram .left {
   width: 70%;
   border-right: 2px solid rgba(170, 222, 237, 0.2);
 }
-.customer-vpc .public .left .load-balancer,
-.customer-vpc .public .left .app {
+
+.diagram .load-balancer,
+.diagram .app {
   width: 100%;
   height: 43%;
   margin-top: 3%;
-
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
-
   opacity: 0;
 }
-.customer-vpc .public .left .load-balancer {
+.diagram .load-balancer {
   margin-top: 21px;
 }
-.customer-vpc .public .right {
+
+
+.diagram .right {
   width: 30%;
 }
-.customer-vpc .public .right .bastion {
+.diagram .bastion {
   width: 100%;
   height: 93%;
   margin-top: 21px;
-
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
-
   opacity: 0;
 }
 
-.customer-vpc .public .left .app.faded,
-.customer-vpc .public .left .load-balancer.faded,
-.customer-vpc .public .right .bastion.faded {
+.diagram .app.faded,
+.diagram .load-balancer.faded,
+.diagram .bastion.faded {
   background: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0);
 }
 
-/*Image fade*/
-.customer-vpc .public .left .app img,
-.customer-vpc .public .left .load-balancer img,
-.customer-vpc .public .right .bastion img,
-.customer-vpc .private .database img {
+/* Image fade */
+.diagram .app img,
+.diagram .load-balancer img,
+.diagram .bastion img,
+.diagram .database img {
   opacity: 1;
   transition: opacity 900ms ease-in-out
 }
-.customer-vpc .public .left .app.faded img,
-.customer-vpc .public .left .load-balancer.faded img,
-.customer-vpc .public .right .bastion.faded img,
-.customer-vpc .private .database.faded img {
+.diagram .app.faded img,
+.diagram .load-balancer.faded img,
+.diagram .bastion.faded img,
+.diagram .database.faded img {
   opacity: 0;
 }
 
 
-.customer-vpc .private {
+.diagram .private {
   position: relative;
   height: 40%;
   width: 0%;
   background: repeating-linear-gradient(-45deg, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 6px, rgba(255,255,255,0.15) 6px, rgba(255,255,255,0.15) 12px);
   padding: 3%;
   opacity: 0;
-
   transition: width 1000ms cubic-bezier(.69,.63,.32,1);
 }
-.customer-vpc .private.loaded {
+.diagram .private.loaded {
   width: 100%;
 }
 
-section.illustration .customer-vpc .private span {
+.diagram .private span {
   display: inline-block;
   position: absolute;
   left: 50%;
@@ -469,33 +447,86 @@ section.illustration .customer-vpc .private span {
   z-index: 1;
   opacity: 0;
 }
-section.illustration .customer-vpc .private span img {
+.diagram .private span img {
   margin-right: 4px;
 }
-.customer-vpc .private .database {
+
+.diagram .database {
   width: 100%;
   height: 89%;
   margin-top: 23px;
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
   opacity: 0;
 }
-.customer-vpc .private .database.faded {
+.diagram .database.faded {
   background: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0);
 }
-.docker {
+
+
+/* Controls all the docker boxes */
+
+.diagram .docker {
   text-align: center;
   background: rgba(255, 255, 255, 1);
   color: rgba(80, 164, 239, 1);
   font-weight: normal;
   font-size: 1.5em;
 }
-.docker img.margin-right {
+.diagram .docker img.margin-right {
   margin-right: 12px;
 }
-.docker img.margin-bottom {
+.diagram .docker img.margin-bottom {
   margin-bottom: 6px;
 }
+
+
+
+/* Just for the animation */
+
+.diagram .loading-circle-1 {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px dashed rgba(255,255,255,0.3);
+  opacity: 0;
+}
+.diagram .loading-circle-2 {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 1px dashed rgba(255,255,255,0.7);
+  color: #fff;
+  opacity: 0;
+}
+.diagram .loading-text {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  margin-left: -80px;
+  width: 160px;
+  color: #fff !important;
+  opacity: 0;
+}
+
+
+
+
+/*----------------------------------
+  Fixed Network Animation
+------------------------------------*/
 
 .network-container {
   position: fixed;
@@ -532,9 +563,7 @@ section.illustration .customer-vpc .private span img {
   left: -2px;
   top: 0%;
   border: 1px solid rgba(170, 222, 237, 1);
-
   transition: opacity 200ms ease-in-out;
-
   opacity: 0;
 }
 
@@ -543,7 +572,7 @@ section.illustration .customer-vpc .private span img {
 
 
 /*----------------------------------
-  Medium devices: iPad
+  Medium devices: iPad vertical
 ------------------------------------*/
 
 @media (max-width: 991px) {
@@ -553,6 +582,7 @@ section.illustration .customer-vpc .private span img {
 
 
   /* fullpage.js overrides */
+
   #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
     display: none !important;
   }
@@ -564,53 +594,62 @@ section.illustration .customer-vpc .private span img {
   }
 
 
+  /* Fixed Console  */
 
-  section.fixed-panel {
-    z-index: 1001;
-  }
-  section.fixed-console {
+  .fixed-console {
     z-index: 1002;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
   }
+
+
+  /* Static Slides */
+
   .slides {
     z-index: 1003;
     position: relative;
   }
-  section.illustration {
-    padding-top: 100px;
+  .copy {
+    bottom: 40px;
   }
-  section.illustration .aws {
-    width: 85%;
-    height: 85%;
-    margin: 20px auto;
-    padding: 10px 10px 0;
-  }
-  section.illustration .aws .aptible-cloud {
-    padding: 10px 0 0;
-  }
-
-  .customer-vpc-dots.loaded {
-    width: 98%;
-    top: 10px;
-  }
-  .customer-vpc.loaded {
-    width: 99%;
-    height: 99%;
-  }
-
   #intro .copy h1 {
     font-size: 4em;
     margin-top: 40%;
   }
 
-  section.copy {
-    bottom: 40px;
+
+  /* Fixed Diagram */
+
+  .fixed-diagram {
+    z-index: 1001;
+  }
+  .diagram {
+    padding-top: 100px;
+  }
+  .diagram .aws {
+    width: 85%;
+    height: 85%;
+    margin: 20px auto;
+    padding: 10px 10px 0;
+  }
+  .diagram .aptible-cloud {
+    padding: 10px 0 0;
+  }
+
+  .diagram .customer-vpc-dots.loaded {
+    width: 98%;
+    top: 10px;
+  }
+  .diagram .customer-vpc.loaded {
+    width: 99%;
+    height: 99%;
   }
 
 }
+
+
 
 /*----------------------------------
   Small devices: iPhone 6+ and below
@@ -628,7 +667,9 @@ section.illustration .customer-vpc .private span img {
     width: 100px;
   }
 
+
   /* fullpage.js overrides */
+
   #fp-nav ul li:hover .fp-tooltip, #fp-nav.fp-show-active a.active + .fp-tooltip {
     display: none !important;
   }
@@ -640,26 +681,15 @@ section.illustration .customer-vpc .private span img {
   }
 
 
-  section.fixed-panel {
-    z-index: 0;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    opacity: 0;
-  }
-  section.fixed-console {
+  /* Fixed Console */
+
+  .fixed-console {
     z-index: 1;
     position: fixed;
     top: 60%;
     bottom: 0;
     left: 0;
     right: 0;
-  }
-  .slides {
-    z-index: 2;
-    position: relative;
   }
   .console .base {
     width: 85%;
@@ -671,148 +701,179 @@ section.illustration .customer-vpc .private span img {
   .console .base .body {
     padding: 12px;
   }
-  section.illustration {
-    font-size: 1em;
-    height: 75%;
-    padding-top: 30px;
-  }
-  section.illustration .aws {
-    width: 85%;
-    height: 85%;
-    margin: 20px auto;
-    padding: 6px 6px 0;
-  }
-  section.illustration .aws span.title {
-    font-size: 8px;
-    margin: 0 0 2px;
-  }
-  section.illustration .aws .aptible-cloud {
-    font-size: 0.8em;
-    padding: 6px 0 0;
-  }
-  section.illustration .customer-vpc .public span,
-  section.illustration .customer-vpc .private span {
-    top: 2px;
-    width: 100px;
-    padding: 4px 0;
-    font-size: 0.9em;
-    margin-left: -50px;
-  }
-  section.illustration .customer-vpc .private span {
-    width: 120px;
-    margin-left: -60px;
-  }
-  section.illustration .customer-vpc .private span img {
-    width: 12px;
-    height: 12px;
+
+
+  /* Static Slides */
+
+  .slides {
+    z-index: 2;
+    position: relative;
   }
 
-  .customer-vpc .public .http,
-  .customer-vpc .public .ssh {
-    font-size: 0.7em;
-    top: 10px;
-  }
-  .customer-vpc .public .http {
-    left: 7px;
-  }
-  .customer-vpc .public .ssh {
-    right: 7px;
-  }
-
-  .loading-circle-1 {
-    width: 140px;
-    height: 140px;
-  }
-  .loading-circle-2 {
-    width: 170px;
-    height: 170px;
-  }
-  .customer-vpc-dots {
-    width: 220px;
-    height: 220px;
-  }
-  .customer-vpc {
-    width: 190px;
-    height: 190px;
-  }
-
-  .customer-vpc-dots.loaded {
-    width: 96%;
-    top: 6px;
-  }
-  .customer-vpc.loaded {
-    width: 99%;
-    height: 99%;
-  }
-  .customer-vpc .public .left {
-    width: 65%;
-  }
-  .customer-vpc .public .left .load-balancer {
-    margin-top: 18px;
-  }
-  .customer-vpc .public .right {
-    width: 35%;
-  }
-  .customer-vpc .public .right .bastion {
-    height: 88%;
-    margin-top: 18px;
-  }
-  .customer-vpc .private .database {
-    height: 80%;
-    margin-top: 18px;
-  }
-
-  section.copy {
+  .copy {
     bottom: 0;
   }
-  section.copy h2 {
+  .copy h2 {
     font-size: 1.6em;
     margin: 4px 0 4px;
   }
-  section.copy p {
+  .copy p {
     font-size: 1.2em;
     margin-bottom: 6px;
     line-height: 1.3;
   }
-
 
   #intro .copy h1 {
     font-size: 3em;
     margin-top: 35%;
   }
 
-  .docker {
+
+  /* Fixed Diagram */
+
+  .fixed-diagram {
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+  }
+
+  .diagram {
+    font-size: 1em;
+    height: 75%;
+    padding-top: 30px;
+  }
+  .diagram .aws {
+    width: 85%;
+    height: 85%;
+    margin: 20px auto;
+    padding: 6px 6px 0;
+  }
+  .diagram span.title {
+    font-size: 8px;
+    margin: 0 0 2px;
+  }
+  .diagram .aptible-cloud {
+    font-size: 0.8em;
+    padding: 6px 0 0;
+  }
+  .diagram .public span,
+  .diagram .private span {
+    top: 2px;
+    width: 100px;
+    padding: 4px 0;
+    font-size: 0.9em;
+    margin-left: -50px;
+  }
+  .diagram .private span {
+    width: 120px;
+    margin-left: -60px;
+  }
+  .diagram .private span img {
+    width: 12px;
+    height: 12px;
+  }
+
+  .diagram .http,
+  .diagram .ssh {
+    font-size: 0.7em;
+    top: 10px;
+  }
+  .diagram .http {
+    left: 7px;
+  }
+  .diagram .ssh {
+    right: 7px;
+  }
+
+  .diagram .customer-vpc-dots.loaded {
+    width: 96%;
+    top: 6px;
+  }
+
+  .diagram .customer-vpc {
+    width: 190px;
+    height: 190px;
+  }
+  .diagram .customer-vpc.loaded {
+    width: 99%;
+    height: 99%;
+  }
+
+  .diagram .left {
+    width: 65%;
+  }
+  .diagram .load-balancer {
+    margin-top: 18px;
+  }
+  .diagram .right {
+    width: 35%;
+  }
+  .diagram .bastion {
+    height: 88%;
+    margin-top: 18px;
+  }
+  .diagram .database {
+    height: 80%;
+    margin-top: 18px;
+  }
+
+
+  .diagram .docker {
     font-size: 1em;
   }
-  .customer-vpc .public .left .app img,
-  .customer-vpc .public .left .load-balancer img,
-  .customer-vpc .public .right .bastion img,
-  .customer-vpc .private .database img {
+  .diagram .app img,
+  .diagram .load-balancer img,
+  .diagram .bastion img,
+  .diagram .database img {
     width: 20px;
     height: 20px;
   }
-  .docker img.margin-right {
+  .diagram .docker img.margin-right {
     margin-right: 3px;
   }
-  .docker img.margin-bottom {
+  .diagram .docker img.margin-bottom {
     margin-bottom: 3px;
+  }
+
+  .diagram .loading-circle-1 {
+    width: 140px;
+    height: 140px;
+  }
+  .diagram .loading-circle-2 {
+    width: 170px;
+    height: 170px;
+  }
+  .diagram .customer-vpc-dots {
+    width: 220px;
+    height: 220px;
   }
 
 }
 
-/* Bump the text up on iPhone 6 & 6+ */
+
+/*----------------------------------
+  iPhone 6 & 6+ specific text bump
+------------------------------------*/
+
 @media (max-width: 991px) and (max-height: 736px) and (min-height: 481px) {
-  section.illustration {
-    padding-top: 40px;
-  }
-  section.copy {
+
+  .copy {
     bottom: 24px;
   }
-  section.copy h2 {
+  .copy h2 {
     font-size: 2.2em;
     margin: 6px 0 6px;
   }
 
+  .diagram {
+    padding-top: 40px;
+  }
 
 }
+
+
 

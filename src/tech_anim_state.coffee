@@ -43,6 +43,23 @@ class techAnimation
   }
 
 
+  # Helpers
+  # Staggered Typing function
+  Helpers =
+    staggerType: (char, $src, delay) ->
+      setTimeout (-> $src.append char ), delay
+
+    typeConsole: (str, $src) ->
+      max = 80;
+      min = 0;
+
+      for i in [0...str.length]
+        delay = Math.floor(Math.random() * (max - min)) + min + (i * max)
+        this.staggerType str[i], $src, delay
+
+
+
+
   #
   # Play Animations
   # These animations fire when a user scrolls down

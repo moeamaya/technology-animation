@@ -393,7 +393,6 @@ class techAnimation
       network = new Network()
       network.generateNetwork()
       network.generateLines()
-      console.log 'network created'
 
 
   # Stops all animations that are currently playing
@@ -430,7 +429,6 @@ class techAnimation
     $('.copy').addClass('disappear')
 
     if !network
-      console.log 'no network'
       setTimeout (->
         finalInfrastructureState()
       ), 100

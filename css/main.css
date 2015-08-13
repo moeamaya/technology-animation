@@ -617,11 +617,14 @@ h4 {
     position: relative;
   }
   .copy {
-    bottom: 40px;
+    bottom: 60px;
   }
   #intro .copy h1 {
     font-size: 4em;
     margin-top: 40%;
+  }
+  #signup .copy {
+    bottom: 100px;
   }
 
 

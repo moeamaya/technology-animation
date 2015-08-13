@@ -139,7 +139,7 @@ class techAnimation
         $('.customer-vpc-dots, .customer-vpc').addClass('loaded')
       ), 3000
       setTimeout (->
-        $('.aws span.title').css('color', 'rgba(255,255,255,0.3)')
+        awsTitle.css('color', 'rgba(255,255,255,0.3)')
       ), 3600
       # STEP3: Slide in Private Gateway and Pop in labels
       animate
@@ -357,7 +357,7 @@ class techAnimation
       ).addClass('loaded')
 
     # Fade out AWS and Aptible Cloud labels
-    $('.aws span.title, aws span.title').css('color', 'rgba(255,255,255,0.3)')
+    awsTitle.css('color', 'rgba(255,255,255,0.3)')
 
     # Full width private gateway
     $('.private').css(

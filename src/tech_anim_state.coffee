@@ -13,7 +13,7 @@
 
 class techAnimation
 
-  # TODO
+  # TODO (perf worth it? runs great on iphone 5s)
   # Very partial variable list
   awsTitle = $ '.aws .title'
   aptibleTitle = $ '.aptible-cloud .title'
@@ -340,10 +340,10 @@ class techAnimation
 
   #
   # Click Helpers
-  # + Fast forward infrastructure animation state
-  # + Create Network animation
-  # + Stop all animations
-  # + Reset the view for all slides
+  # ++ Fast forward infrastructure animation state
+  # ++ Create Network animation
+  # ++ Stop all animations
+  # ++ Reset the view for all slides
   #
 
   # If diagram animation hasn't finished
@@ -396,7 +396,7 @@ class techAnimation
 
 
   # Stops all animations that are currently playing
-  # and thoe that are queued up to play later (setTimeout)
+  # and those that are queued up to play later (longer setTimeouts)
   stopInfrastructure = ->
     animate.stop('.console')
     animate.stop('.fixed-diagram')
@@ -422,7 +422,7 @@ class techAnimation
     ), 500
 
 
-  # Runs on every click navigation
+  # Runs on every click navigation!!!
   # callback useful for slide specific actions
   clickReset = (callback) ->
     stopInfrastructure()
@@ -494,6 +494,7 @@ class techAnimation
 
 
   #
+  # PUBLIC
   # Animation arrays
   # fullPage.js uses index values to determine
   # its current slide position which corresponds

@@ -8,16 +8,17 @@
 # leave: runs before a slide transitions on scroll down
 # leaveUp: runs before a slide transtions on scroll up
 # click: runs when a user clicks the navigation dots
+#   caveat: will play leave(Up) animation if you're one slide away
 #
 
 class techAnimation
 
-
+  # TODO
+  # Very partial variable list
   awsTitle = $ '.aws .title'
   aptibleTitle = $ '.aptible-cloud .title'
 
   fixedDiagram = $ '.fixed-diagram'
-
 
 
   # Network Animation Object
@@ -78,7 +79,6 @@ class techAnimation
         duration: 1000
         delay: 2300
       setTimeout (->
-        intro.play = true
         $src = $ '.b1-text'
         Helpers.typeConsole 'aptible account:create', $src
       ), 2000
@@ -88,7 +88,7 @@ class techAnimation
       $('.load-balancer, .app, .bastion, .database').removeClass('faded')
       $('.network-container').addClass('disappear')
       $('#infrastructure .copy').removeClass('disappear')
-      $('.aws span.title').css('color', 'rgba(255,255,255,0.3)')
+      awsTitle.css('color', 'rgba(255,255,255,0.3)')
     else
       # disable scrolling until animation finishes
       # borrowed from apple.com/mac-pro
@@ -336,11 +336,12 @@ class techAnimation
     setTimeout (-> $('#scale .copy').removeClass('disappear') ), 500
     network.stop()
 
-  #
+
+
+
+
   # If diagram animation hasn't finished
   # this will fast forward the DOM to the correct state
-  # **Only used by the click handlers
-  #
   finalInfrastructureState = (show = true) ->
 
     # Full size customer vpc
@@ -381,12 +382,21 @@ class techAnimation
 
 
 
+  #
+  # Click Helpers
+  # + Create Network animation
+  # + Fast forward infrastructure animation state
+  # + Stop all animations
+  #
   createNetwork = ->
     if !network
       network = new Network()
       network.generateNetwork()
       network.generateLines()
 
+
+  # Stops all animations that are currently play
+  # and queued up to play later (setTimeout)
   stopInfrastructure = ->
     animate.stop('.console')
     animate.stop('.fixed-diagram')
@@ -405,15 +415,39 @@ class techAnimation
     clearTimeout infrastructure.privateAnim
 
     setTimeout (->
-      $('.loading-circle-1, .loading-circle-2, .loading-text').hide()
+      $('.loading-circle-1, .loading-circle-2, .loading-text').remove()
       $('.diagram span.title').css('color', 'rgba(255,255,255,0.3)')
       infrastructure.played = true
     ), 500
 
 
-  clickReset = ->
+  # Runs on every click navigation
+  # callback useful for slide specific actions
+  clickReset = (callback) ->
     stopInfrastructure()
     $('.copy').addClass('disappear')
+    if !network
+      setTimeout (->
+        finalInfrastructureState()
+      ), 100
+    else
+      network.stop()
+      clearTimeout scaling.half2
+      animate
+        el: fixedDiagram
+        easing: "easeOutQuad"
+        opacity: [0, 1]
+        duration: 50
+      $('.network-container').removeClass('disappear')
+      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+
+      setTimeout (->
+        $('.slides, .network-container').fadeIn()
+        fixedDiagram.fadeIn()
+
+        # callback used for specific slide actions
+        callback()
+      ), 1000
 
 
   #
@@ -422,219 +456,40 @@ class techAnimation
   # the navigations dots to jump to a slide
   #
   clickIntro = ->
-    clickReset()
-    if !network
-      setTimeout (->
-        finalInfrastructureState()
-      ), 100
-    else
-      clearTimeout scaling.half2
-      network.stop()
-      animate
-        el: fixedDiagram
-        easing: "easeOutQuad"
-        opacity: [1, 0]
-        duration: 50
-      $('.network-container').addClass('disappear')
-
-
-      setTimeout (->
-        $('.slides, .fixed-console, .network-container').fadeIn()
-        fixedDiagram.fadeIn()
-      ), 1000
-
-      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+    clickReset(->
+      $('.fixed-console').fadeIn()
+    )
 
   clickInfrastructure = ->
     clickReset()
-    if !network
-      setTimeout (->
-        finalInfrastructureState()
-      ), 100
-    else
-      clearTimeout scaling.half2
-      network.stop()
-      animate
-        el: fixedDiagram
-        easing: "easeOutQuad"
-        opacity: [0, 1]
-        duration: 50
-      $('.network-container').addClass('disappear')
-
-
-      setTimeout (->
-        $('.slides, .network-container').fadeIn()
-        fixedDiagram.fadeIn()
-      ), 1000
-
-
-      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
 
   clickGateway = ->
     clickReset()
-    if !network
-      setTimeout (->
-        finalInfrastructureState()
-      ), 100
-    else
-      clearTimeout scaling.half2
-      network.stop()
-      animate
-        el: fixedDiagram
-        easing: "easeOutQuad"
-        opacity: [0, 1]
-        duration: 50
-      $('.network-container').removeClass('disappear')
-
-      setTimeout (->
-        $('.slides, .network-container').fadeIn()
-        fixedDiagram.fadeIn()
-      ), 1000
-
-      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
 
   clickNetwork = ->
-    clickReset()
-    if !network
-      setTimeout (->
-        finalInfrastructureState()
-      ), 100
-      setTimeout (->  network.runHttp() ), 800
-    else
-      clearTimeout scaling.half2
-      network.stop()
-      animate
-        el: fixedDiagram
-        easing: "easeOutQuad"
-        opacity: [0, 1]
-        duration: 50
-      $('.network-container').removeClass('disappear')
-
-      setTimeout (->
-        $('.slides, .network-container').fadeIn()
-        fixedDiagram.fadeIn()
-        network.runHttp()
-      ), 1000
-
-
-      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+    clickReset(->
+      setTimeout (-> network.runHttp), 1000
+    )
 
   clickApp = ->
     clickReset()
-    if !network
-      setTimeout (->
-        finalInfrastructureState()
-      ), 100
-    else
-      clearTimeout scaling.half2
-      network.stop()
-      animate
-        el: fixedDiagram
-        easing: "easeOutQuad"
-        opacity: [0, 1]
-        duration: 50
-      $('.network-container').removeClass('disappear')
-
-
-      setTimeout (->
-        $('.slides, .network-container').fadeIn()
-        fixedDiagram.fadeIn()
-      ), 1000
-
-      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
 
   clickBastion = ->
-    clickReset()
-    if !network
-      setTimeout (->
-        finalInfrastructureState()
-      ), 100
-      setTimeout (->  network.runSSH() ), 800
-    else
-      clearTimeout scaling.half2
-      network.stop()
-      animate
-        el: fixedDiagram
-        easing: "easeOutQuad"
-        opacity: [0, 1]
-        duration: 50
-      $('.network-container').removeClass('disappear')
-
-      setTimeout (->
-        $('.slides, .network-container').fadeIn()
-        fixedDiagram.fadeIn()
-        network.runSSH()
-      ), 1000
-
-      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
+    clickReset(->
+      setTimeout (-> network.runSSH), 1000
+    )
 
   clickDatabse = ->
     clickReset()
-    if !network
-      setTimeout (->
-        finalInfrastructureState()
-      ), 100
-    else
-      clearTimeout scaling.half2
-      network.stop()
-      animate
-        el: fixedDiagram
-        easing: "easeOutQuad"
-        opacity: [0, 1]
-        duration: 50
-      $('.network-container').removeClass('disappear')
-      setTimeout (->
-        $('.slides, .network-container').fadeIn()
-        fixedDiagram.fadeIn()
-      ), 1000
-
-      $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
 
   clickScaling = ->
-    clickReset()
-    if !network
-      setTimeout (->
-        finalInfrastructureState()
-      ), 100
-    else
-      network.stop()
-      animate
-        el: fixedDiagram
-        easing: "easeOutQuad"
-        opacity: [0, 1]
-        duration: 50
-      $('.network-container').removeClass('disappear')
-
-
-      $('.load-balancer, .app, .bastion, .database').css('opacity', 1)
-      setTimeout (->
-        $('.slides, .network-container').fadeIn()
-        fixedDiagram.fadeIn();
-        network.runHalf()
-      ), 1000
+    clickReset(->
+      setTimeout (-> network.runHalf), 1000
+    )
 
   clickSignup = ->
     clickReset()
-    if !network
-      setTimeout (->
-        finalInfrastructureState()
-      ), 100
-    else
-      network.stop()
-      animate
-        el: fixedDiagram
-        easing: "easeOutQuad"
-        opacity: [0, 1]
-        duration: 50
-      $('.network-container').removeClass('disappear')
 
-
-      $('.load-balancer, .app, .bastion, .database').css('opacity', 1)
-      setTimeout (->
-        $('.slides, .network-container').fadeIn()
-        fixedDiagram.fadeIn()
-        network.runHalf()
-      ), 1000
 
 
   #

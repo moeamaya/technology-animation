@@ -326,7 +326,7 @@ h4 {
 }
 
 .diagram .public {
-  height: 60%;
+  height: 40%;
   width: 100%;
 }
 .diagram .public span {
@@ -373,32 +373,27 @@ h4 {
   width: 70%;
   border-right: 2px solid rgba(170, 222, 237, 0.2);
 }
-
-.diagram .load-balancer,
-.diagram .app {
-  width: 100%;
-  height: 43%;
-  margin-top: 3%;
-  transition: color 900ms ease-in-out, background 600ms ease-in-out;
-  opacity: 0;
-}
-.diagram .load-balancer {
-  margin-top: 21px;
-}
-
-
 .diagram .right {
   width: 30%;
 }
-.diagram .bastion {
+
+.diagram .load-balancer {
   width: 100%;
-  height: 93%;
-  margin-top: 21px;
+  height: 90%;
+  margin-top: 23px;
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
   opacity: 0;
 }
 
-.diagram .app.faded,
+.diagram .bastion {
+  width: 100%;
+  height: 90%;
+  margin-top: 23px;
+  transition: color 900ms ease-in-out, background 600ms ease-in-out;
+  opacity: 0;
+}
+
+
 .diagram .load-balancer.faded,
 .diagram .bastion.faded {
   background: rgba(255, 255, 255, 0.05);
@@ -423,7 +418,7 @@ h4 {
 
 .diagram .private {
   position: relative;
-  height: 40%;
+  height: 60%;
   width: 0%;
   background: repeating-linear-gradient(-45deg, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 6px, rgba(255,255,255,0.15) 6px, rgba(255,255,255,0.15) 12px);
   padding: 3%;
@@ -451,13 +446,23 @@ h4 {
   margin-right: 4px;
 }
 
-.diagram .database {
+.diagram .app {
   width: 100%;
-  height: 89%;
-  margin-top: 23px;
+  height: 42%;
+  margin-top: 25px;
   transition: color 900ms ease-in-out, background 600ms ease-in-out;
   opacity: 0;
 }
+
+.diagram .database {
+  width: 100%;
+  height: 42%;
+  margin-top: 12px;
+  transition: color 900ms ease-in-out, background 600ms ease-in-out;
+  opacity: 0;
+}
+
+.diagram .app.faded,
 .diagram .database.faded {
   background: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0);
@@ -728,6 +733,18 @@ h4 {
     margin-top: 35%;
   }
 
+  #signup .copy {
+    bottom: 40px;
+  }
+  #signup .copy h2 {
+    font-size: 2em;
+    margin-bottom: 0.4em;
+  }
+  #signup .btn {
+    width: auto;
+    padding: 6px 10px;
+    font-size: 1em;
+  }
 
   /* Fixed Diagram */
 
@@ -807,18 +824,22 @@ h4 {
     width: 65%;
   }
   .diagram .load-balancer {
+    height: 80%;
     margin-top: 18px;
   }
   .diagram .right {
     width: 35%;
   }
   .diagram .bastion {
-    height: 88%;
+    height: 80%;
+    margin-top: 18px;
+  }
+
+  .diagram .app {
     margin-top: 18px;
   }
   .diagram .database {
-    height: 80%;
-    margin-top: 18px;
+    margin-top: 4px;
   }
 
 
@@ -867,6 +888,13 @@ h4 {
   .copy h2 {
     font-size: 2.2em;
     margin: 6px 0 6px;
+  }
+  #signup .copy {
+    bottom: 50px
+  }
+  #signup .copy h2 {
+    font-size: 2.4em;
+    margin-bottom: 0.6em;
   }
 
   .diagram {

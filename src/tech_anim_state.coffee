@@ -18,6 +18,7 @@ class techAnimation
   awsTitle = $ '.diagram .title'
 
   fixedDiagram = $ '.fixed-diagram'
+  fixedConsole = $ '.fixed-console'
 
 
   # Network Animation Object
@@ -180,8 +181,8 @@ class techAnimation
 
   playGateway = ->
     $('.http, .ssh').addClass('faded')
-    setTimeout (-> $('.docker').addClass('faded') ), 100
     $('#network .copy').removeClass('disappear')
+    setTimeout (-> $('.docker').addClass('faded') ), 100
     if !network
       network = new Network()
       network.generateNetwork()
@@ -392,6 +393,7 @@ class techAnimation
       network = new Network()
       network.generateNetwork()
       network.generateLines()
+      console.log 'network created'
 
 
   # Stops all animations that are currently playing
@@ -428,6 +430,7 @@ class techAnimation
     $('.copy').addClass('disappear')
 
     if !network
+      console.log 'no network'
       setTimeout (->
         finalInfrastructureState()
       ), 100
@@ -442,8 +445,7 @@ class techAnimation
       $('.load-balancer, .app, .bastion, .database').css('opacity', 1).addClass('faded')
 
       setTimeout (->
-        $('.slides, .network-container').fadeIn()
-        fixedDiagram.fadeIn()
+        $('.slides').fadeIn()
 
         # callback used for specific slide actions
         callback()
@@ -457,43 +459,63 @@ class techAnimation
   #
   clickIntro = ->
     clickReset(->
-      $('.fixed-console').fadeIn()
+      fixedConsole.fadeIn()
     )
 
   clickInfrastructure = ->
-    clickReset()
+    clickReset(->
+      fixedDiagram.fadeIn()
+    )
 
   clickGateway = ->
-    clickReset()
+    clickReset(->
+      fixedDiagram.fadeIn()
+      $('.network-container').fadeIn()
+    )
 
   clickNetwork = ->
     clickReset(->
+      fixedDiagram.fadeIn()
+      $('.network-container').fadeIn()
       setTimeout (-> network.runHttp), 100
     )
 
   clickApp = ->
-    clickReset()
+    clickReset(->
+      fixedDiagram.fadeIn()
+      $('.network-container').fadeIn()
+    )
 
   clickBastion = ->
     clickReset(->
+      fixedDiagram.fadeIn()
+      $('.network-container').fadeIn()
       setTimeout (-> network.runSSH), 100
     )
 
   clickDatabse = ->
-    clickReset()
+    clickReset(->
+      fixedDiagram.fadeIn()
+      $('.network-container').fadeIn()
+    )
 
   clickScaling = ->
     clickReset(->
-      setTimeout (-> network.runHalf), 100
+      fixedDiagram.fadeIn()
+      $('.network-container').fadeIn()
+      setTimeout (-> network.runHalf), 1000
     )
 
   clickSignup = ->
-    clickReset()
+    clickReset(->
+      fixedDiagram.fadeIn()
+      $('.network-container').fadeIn()
+    )
 
 
 
   #
-  # PUBLIC
+  # PUBLIC METHODS
   # Animation arrays
   # fullPage.js uses index values to determine
   # its current slide position which corresponds

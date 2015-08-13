@@ -334,11 +334,17 @@ class techAnimation
 
   leaveUpSignup = ->
     setTimeout (-> $('#scale .copy').removeClass('disappear') ), 500
-    network.stop()
+    network.runHalf()
 
 
 
-
+  #
+  # Click Helpers
+  # + Fast forward infrastructure animation state
+  # + Create Network animation
+  # + Stop all animations
+  # + Reset the view for all slides
+  #
 
   # If diagram animation hasn't finished
   # this will fast forward the DOM to the correct state
@@ -381,13 +387,7 @@ class techAnimation
     ), 500
 
 
-
-  #
-  # Click Helpers
-  # + Create Network animation
-  # + Fast forward infrastructure animation state
-  # + Stop all animations
-  #
+  # Create that network if it ain't there yet
   createNetwork = ->
     if !network
       network = new Network()
@@ -395,8 +395,8 @@ class techAnimation
       network.generateLines()
 
 
-  # Stops all animations that are currently play
-  # and queued up to play later (setTimeout)
+  # Stops all animations that are currently playing
+  # and thoe that are queued up to play later (setTimeout)
   stopInfrastructure = ->
     animate.stop('.console')
     animate.stop('.fixed-diagram')
@@ -413,6 +413,7 @@ class techAnimation
     clearTimeout infrastructure.copyAnim
     clearTimeout infrastructure.circleAnim
     clearTimeout infrastructure.privateAnim
+    clearTimeout scaling.half2
 
     setTimeout (->
       $('.loading-circle-1, .loading-circle-2, .loading-text').remove()
@@ -426,13 +427,13 @@ class techAnimation
   clickReset = (callback) ->
     stopInfrastructure()
     $('.copy').addClass('disappear')
+
     if !network
       setTimeout (->
         finalInfrastructureState()
       ), 100
     else
       network.stop()
-      clearTimeout scaling.half2
       animate
         el: fixedDiagram
         easing: "easeOutQuad"
@@ -468,7 +469,7 @@ class techAnimation
 
   clickNetwork = ->
     clickReset(->
-      setTimeout (-> network.runHttp), 1000
+      setTimeout (-> network.runHttp), 100
     )
 
   clickApp = ->
@@ -476,7 +477,7 @@ class techAnimation
 
   clickBastion = ->
     clickReset(->
-      setTimeout (-> network.runSSH), 1000
+      setTimeout (-> network.runSSH), 100
     )
 
   clickDatabse = ->
@@ -484,7 +485,7 @@ class techAnimation
 
   clickScaling = ->
     clickReset(->
-      setTimeout (-> network.runHalf), 1000
+      setTimeout (-> network.runHalf), 100
     )
 
   clickSignup = ->

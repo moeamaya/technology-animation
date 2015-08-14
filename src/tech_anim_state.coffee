@@ -232,6 +232,7 @@ class techAnimation
     $('.load-balancer, .app, .bastion, .database').removeClass('faded')
     $('#signup .copy').removeClass('disappear')
 
+
   #
   # Leave Animations
   # These animations fire when a user scrolls down
@@ -294,6 +295,7 @@ class techAnimation
     clearTimeout scaling.half2
     network.stop()
 
+
   #
   # LeaveUp Animations
   # These animations fire when before a user scrolls up
@@ -306,16 +308,13 @@ class techAnimation
       opacity: [1, 0]
       duration: 300
     setTimeout ( -> $('.fixed-console').fadeIn() ), 800
-
     $('#infrastructure .copy').addClass('disappear')
+
     unless infrastructure.played
       fixedDiagram.fadeOut(50)
-      stopInfrastructure()
-      clickReset()
-      if !network
-        setTimeout (->
-          finalInfrastructureState(false)
-        ), 100
+      clickReset (->
+        fixedConsole.fadeIn()
+      ), false
 
 
   leaveUpGateway = ->
@@ -396,10 +395,13 @@ class techAnimation
       delay: 100
 
     setTimeout (->
+      console.log show
       if show
         fixedDiagram.fadeIn()
       $('.slides').fadeIn()
       infrastructure.played = true
+
+      console.log 'creating network'
       createNetwork()
     ), 500
 
@@ -440,14 +442,15 @@ class techAnimation
 
 
   # Runs on every click navigation!!!
-  # callback useful for slide specific actions
-  clickReset = (callback) ->
+  # callback: useful for slide specific actions
+  # show: boolean for whether to show the diagram or not
+  clickReset = (callback, show = true) ->
     stopInfrastructure()
     $('.copy').addClass('disappear')
 
     if !network
       setTimeout (->
-        finalInfrastructureState()
+        finalInfrastructureState(show)
       ), 100
     else
       network.stop()
@@ -518,7 +521,7 @@ class techAnimation
     clickReset(->
       fixedDiagram.fadeIn()
       $('.network-container').fadeIn()
-      setTimeout (-> network.runHalf), 1000
+      setTimeout (-> network.runHalf), 100
     )
 
   clickSignup = ->

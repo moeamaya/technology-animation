@@ -16,6 +16,7 @@ var Network = function(){
   var vpcLeft = Math.floor(vpcPosition.left) + (OFFSET/2);
   var vpcWidth = $vpc.outerWidth() - OFFSET;
 
+
   var numLines = Math.ceil(vpcWidth / SPACING);
   var halfLines = Math.ceil(numLines * 0.65);
 

@@ -4,13 +4,20 @@ var NetworkLine = function(yPos, klass){
   var self = Object.create(NetworkLine.prototype);
 
   var start = null;
-  var startTime = Helpers.randomTime(0, 3);
+  var startTime = null;
 
   //
   var $dot;
   var $active;
   var $line;
   var animating;
+
+  // input a min and max range in seconds ie (1, 10)
+  // returns a random time value in milliseconds
+  var randomTime = function(min, max){
+    return ( Math.random() * (max - min) + min ) * 1000;
+  };
+
 
   //
   var step =  function(timestamp){
@@ -35,6 +42,7 @@ var NetworkLine = function(yPos, klass){
     $line = $("<div class='network-line " + klass + "'>").css({
       left: yPos + "px"
     });
+    startTime = randomTime(0, 3);
     createActive();
   };
 

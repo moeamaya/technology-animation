@@ -21,7 +21,6 @@ var Network = function(){
   var halfLines = Math.ceil(numLines * 0.65);
 
 
-
   var regenerateNetwork = function() {
     destroyNetwork();
 
@@ -31,7 +30,7 @@ var Network = function(){
     vpcWidth = $vpc.outerWidth() - OFFSET;
 
     numLines = Math.ceil(vpcWidth / SPACING);
-    halfLines = Math.ceil(numLines * 0.7);
+    halfLines = Math.ceil(numLines * 0.65);
 
     $networkContainer
       .css({

@@ -201,9 +201,8 @@ class techAnimation
     $('#network .copy').removeClass('disappear')
     setTimeout (-> $('.docker').addClass('faded') ), 100
     if !network
-      network = new Network()
-      network.generateNetwork()
-      network.generateLines()
+      network = new TechNetwork()
+      network.createNetwork()
     else
       $('.network-container').removeClass('disappear')
 
@@ -395,13 +394,11 @@ class techAnimation
       delay: 100
 
     setTimeout (->
-      console.log show
       if show
         fixedDiagram.fadeIn()
       $('.slides').fadeIn()
       infrastructure.played = true
 
-      console.log 'creating network'
       createNetwork()
     ), 500
 
@@ -409,9 +406,8 @@ class techAnimation
   # Create that network if it ain't there yet
   createNetwork = ->
     if !network
-      network = new Network()
-      network.generateNetwork()
-      network.generateLines()
+      network = new TechNetwork()
+      network.createNetwork()
 
 
   # Stops all animations that are currently playing

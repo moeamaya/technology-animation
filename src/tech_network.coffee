@@ -42,14 +42,13 @@ class TechNetwork
   generateLines = ->
     for i in [0...numLines]
       yPos = i * SPACING
-      lyne = $ '<div class="network-line">'
 
       if i < halfLines
-        lineObj = new TechNetworkLine(lyne)
+        lineObj = new TechNetworkLine()
         lineObj.createLine(yPos, 'left')
         httpLines.push lineObj
       else
-        lineObj = new TechNetworkLine(lyne)
+        lineObj = new TechNetworkLine()
         lineObj.createLine(yPos, 'right')
         sshLines.push lineObj
 

@@ -1,22 +1,28 @@
 class TechNetworkLine
 
+  constructor: ->
 
-  constructor: (line) ->
+    # unique timing values
     @start = null
     @startTime = null
 
-    @line = line
+    # jquery DOM objects
+    @line = $ '<div class="network-line">'
     @dot = null
     @active = null
 
+    # Request Animation Frame State Object
     @animating = null
 
 
-
+  # Helper function generates a random time
+  # value in miliseconds
   randomTime: (max, min) ->
     (Math.random() * (max - min) + min) * 1000
 
 
+  # Helper function that uses rAF to improve animation
+  # https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
   step: (timestamp) =>
     if !@start
       @start = timestamp
@@ -34,38 +40,9 @@ class TechNetworkLine
 
 
 
-  generateLine: (yPos, klass) ->
-    # @line = $('<div class="network-line">')
-    @line.addClass(klass)
-    @line.css('left', yPos + "px")   
-
-    @startTime = @randomTime(0, 3)
-    @createActive()
-
-
-  createActive: ->
-    @active = $ '<div class="active">'
-    @dot = $ '<div class="dot">'
-    @line.append(@active).append(@dot)
-
-
-  
-  runActivity: ->
-    @showActive()
-
-    setTimeout (=>
-      @animating = window.requestAnimationFrame @step
-    ), @startTime
-
-
-  destroyActivity: ->
-    @hideActive()
-
-    setTimeout ( => 
-      window.cancelAnimationFrame @animating
-      @animating = null
-      @resetActivity()
-    ), 600
+  # -------------------------------
+  # Internal methods
+  # -------------------------------
 
 
   resetActivity: ->
@@ -75,17 +52,16 @@ class TechNetworkLine
 
 
   showActive: ->
-    console.log @dot.offset().left
     animate
       el: @dot
       easing: 'easeOutCirc'
       opacity: [0, 1]
-      duration: 600
+      duration: 500
     animate
       el: @active
       easing: 'easeOutCirc'
       opacity: [0, 1]
-      duration: 600
+      duration: 500
 
 
   hideActive: ->
@@ -93,33 +69,52 @@ class TechNetworkLine
       el: @dot
       easing: 'easeOutCirc'
       opacity: [1, 0]
-      duration: 600
+      duration: 500
     animate
       el: @active
       easing: 'easeOutCirc'
       opacity: [1, 0]
-      duration: 600
+      duration: 500
 
 
 
   # -------------------------------
-  # Public methods
+  # Externally called methods
   # -------------------------------
 
 
+  # Sets position and adds dot + active line
   createLine: (yPos, klass)->
-    @generateLine(yPos, klass)
+    @line.addClass(klass)
+    @line.css('left', yPos + "px")   
+
+    @active = $ '<div class="active">'
+    @dot = $ '<div class="dot">'
+    @line.append(@active).append(@dot)
+
+    @startTime = @randomTime(0, 3)
 
 
+  # Returns jquery object
   getDOMObject: ->
     @line
 
 
+  # Start and show the animation
   startActivity: ->
-    @runActivity()
+    @showActive()
+    setTimeout (=>
+      @animating = window.requestAnimationFrame @step
+    ), @startTime
 
 
+  # Stops the animation from playing and resets position
   stopActivity: ->
-    @destroyActivity()
+    @hideActive()
+    setTimeout ( => 
+      window.cancelAnimationFrame @animating
+      @animating = null
+      @resetActivity()
+    ), 600
 
 
